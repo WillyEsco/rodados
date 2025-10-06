@@ -96,14 +96,15 @@
 ### 🛒 **CARRITO PREMIUM**
 *Experiencia de compra que convierte visitantes en clientes*
 
-![Shopping Cart Premium](https://fabystudios.github.io/Rodados/assets/cart-open4.png)
+<img src="https://fabystudios.github.io/Rodados/assets/cart-open4.png" alt="Shopping Cart Premium" width="30%" style="max-width: 400px; height: auto;"/>
 
 ---
 
 ### 📱 **NAVEGACIÓN ATÓMICA**
 *Bottom Navigation con posicionamiento matemático perfecto*
 
-![Mobile Navigation](https://fabystudios.github.io/Rodados/assets/mobile-nav.png)
+<!-- ![Mobile Navigation](https://fabystudios.github.io/Rodados/assets/mobile-nav.png) -->
+<img src="https://fabystudios.github.io/Rodados/assets/mobile-nav.png" alt="Mobile Navigation" width="30%" style="max-width: 400px; height: auto;"/>
 
 ---
 
@@ -538,19 +539,19 @@ const ProductSchema = {
 │   │   ├── 📱 BottomNav.jsx    # Navegación atómica
 │   │   └── 🌙 ThemeToggle.jsx  # Switch mágico
 │   │
-│   ├── 📄 pages/               # Páginas Organism
-│   │   ├── 🏠 home.jsx         # Landing épico
-│   │   ├── 🛍️ products.jsx    # Catálogo glassmorphic
-│   │   ├── 👥 about.jsx        # Historia visual
+│   ├── 📄 pages/                 # Páginas Organism
+│   │   ├── 🏠 home.jsx           # Landing épico
+│   │   ├── 🛍️ products.jsx       # Catálogo glassmorphic
+│   │   ├── 👥 about.jsx          # Historia visual
 │   │   └── 🔍 productDetails.jsx # Detalles inmersivos
 │   │
-│   ├── 🎭 contexts/            # Estado Global
-│   │   └── 🌈 ThemeContext.jsx # Magia de temas
+│   ├── 🎭 contexts/             # Estado Global
+│   │   └── 🌈 ThemeContext.jsx  # Magia de temas
 │   │
 │   ├── 🎣 hooks/               # Custom Hooks
 │   │   └── 🌙 useThemeMode.js  # Hook temático
 │   │
-│   ├── 🎨 styles/              # Estilos Enhanced
+│   ├── 🎨 styles/             # Estilos Enhanced
 │   ├── 🖼️ assets/             # Recursos Premium
 │   ├── ⚙️ App.jsx             # Router Configuration  
 │   ├── 🎯 main.jsx            # Entry Point
@@ -757,7 +758,7 @@ git push origin feature/mi-idea-genial
 <br>
 
 [![📧 Email](https://img.shields.io/badge/📧_Email-willyEscobar@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:willyEscobar@gmail.com)
-[![🐙 GitHub](https://img.shields.io/badge/🐙_GitHub-fabystudios-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fabystudios)
+[![🐙 GitHub](https://img.shields.io/badge/🐙_GitHub-willyesco-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/willyesco)
 [![💼 LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/tu-perfil)
 
 <br>
