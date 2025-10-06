@@ -759,7 +759,7 @@ git push origin feature/mi-idea-genial
 
 [![📧 Email](https://img.shields.io/badge/📧_Email-willyEscobar@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:willyEscobar@gmail.com)
 [![🐙 GitHub](https://img.shields.io/badge/🐙_GitHub-willyesco-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/willyesco)
-[![💼 LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/tu-perfil)
+[![💼 LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fabesco)
 
 <br>
 
