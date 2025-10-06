@@ -119,19 +119,7 @@
 
 ![Theme Demo](https://fabystudios.github.io/Rodados/assets/theme-demo.gif)
 
----
 
-### 🚫 **PÁGINA 404 PERSONALIZADA**
-*Error page que convierte errores en experiencias memorable*
-
-![404 Custom Page](https://rodados-eshop-beta.vercel.app/assets/404-page.png)
-
----
-
-### 📱 **SOCIAL MEDIA PREVIEW**
-*Meta tags optimizados para WhatsApp, Facebook y Twitter*
-
-![Social Preview Demo](https://rodados-eshop-beta.vercel.app/assets/social-preview.png)
 
 </div>
 
