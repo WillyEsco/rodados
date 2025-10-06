@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 { color: #fff; margin-bottom: 30px; }
+        .btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Test de GitHub Pages</h1>
+        
+        <div class="status">
+            <h3>✅ Esta página funciona!</h3>
+            <p>Si puedes ver esto, GitHub Pages está funcionando correctamente.</p>
+            <p><strong>URL:</strong> <span id="url"></span></p>
+            <p><strong>Tiempo:</strong> <span id="time"></span></p>
+        </div>
+
+        <div>
+            <a href="/" class="btn">🏠 Ir a App Principal</a>
+            <a href="/Rodados/debug.html" class="btn">🔧 Página de Debug</a>
+        </div>
+
+        <div class="status">
+            <h4>🎯 Enlaces de la App:</h4>
+            <a href="/#/" class="btn">Home (#/)</a>
+            <a href="/#/products" class="btn">Products</a>
+            <a href="/#/about" class="btn">About</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('url').textContent = window.location.href;
+        document.getElementById('time').textContent = new Date().toLocaleString();
+        
+        console.log('Test page loaded successfully');
+        console.log('Current URL:', window.location.href);
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "Rodados eShop",
+  "short_name": "Rodados",
+  "description": "Tienda virtual premium de rodados y accesorios",
+  "icons": [
+    {
+      "src": "/Rodados/assets/logo-ppal.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Rodados/assets/logo-ppal.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/Rodados/",
+  "display": "standalone",
+  "theme_color": "#4CAF50",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary"
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada - Rodados eShop</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+      
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        padding: 60px 40px;
+        max-width: 600px;
+        width: 100%;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        animation: float 3s ease-in-out infinite;
+      }
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+      
+      .error-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+      
+      .error-text {
+        flex: 1;
+        min-width: 250px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      
+      .error-image {
+        width: 150px;
+        height: auto;
+        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        animation: bounce 2s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+      
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+      }
+      
+      .error-code {
+        font-size: 6rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient 3s ease infinite;
+        line-height: 1;
+      }
+      
+      @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        line-height: 1.2;
+      }
+      
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+      
+      .buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+      
+      .btn {
+        background: linear-gradient(45deg, #4CAF50, #66BB6A);
+        color: white;
+        text-decoration: none;
+        padding: 15px 30px;
+        border-radius: 25px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255,255,255,0.3);
+        backdrop-filter: blur(10px);
+        font-size: 1.1rem;
+      }
+      
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+        background: linear-gradient(45deg, #388E3C, #4CAF50);
+      }
+      
+      .btn-secondary {
+        background: linear-gradient(45deg, #2196F3, #64B5F6);
+      }
+      
+      .btn-secondary:hover {
+        background: linear-gradient(45deg, #1976D2, #2196F3);
+        box-shadow: 0 15px 30px rgba(33, 150, 243, 0.4);
+      }
+      
+      .countdown {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+      
+      @media (max-width: 768px) {
+        .error-header {
+          flex-direction: column;
+          text-align: center;
+          gap: 20px;
+        }
+        
+        .error-text {
+          text-align: center;
+          min-width: auto;
+        }
+        
+        .error-code { font-size: 4.5rem; }
+        h1 { font-size: 1.5rem; }
+        p { font-size: 1.1rem; }
+        .container { padding: 40px 20px; }
+        .buttons { flex-direction: column; align-items: center; }
+        .error-image { width: 120px; }
+      }
+    </style>
+    
+    <!-- SPA Redirect Script (mantener funcionalidad) -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      let redirectTimer;
+      let userInteracted = false;
+      
+      // Detectar interacción del usuario para cancelar redirección
+      document.addEventListener('click', () => { userInteracted = true; });
+      document.addEventListener('keypress', () => { userInteracted = true; });
+      
+      redirectTimer = setTimeout(function() {
+        if (!userInteracted) {
+          // Mejor detección de entorno y redirección inteligente
+          if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            window.location.href = '/#/';
+          } else {
+            window.location.href = '/';
+          }
+        }
+      }, 8000); // Aumentado a 8 segundos
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="error-header">
+        <div class="error-text">
+          <div class="error-code">404</div>
+          <h1>¡Ups! Página no encontrada</h1>
+        </div>
+        <img src="assets/404.png" alt="Página no encontrada" class="error-image" onerror="this.src='../assets/404.png'; this.onerror=null;">
+      </div>
+      
+      <p>
+        Parece que nuestra mascota se perdió y no puede encontrar la página que buscas. 
+        ¡Pero no te preocupes! Te ayudamos a volver al camino correcto.
+      </p>
+      
+      <div class="buttons">
+        <a href="/" class="btn">🏠 Ir al Inicio</a>
+        <a href="/#/productos" class="btn btn-secondary">🛒 Ver Productos</a>
+      </div>
+      
+      <div class="countdown">
+        <p id="redirect-text">Redirigiendo automáticamente en <span id="countdown">8</span> segundos...</p>
+      </div>
+    </div>
+    
+    <script>
+      // Countdown para redirección con detección de interacción
+      let count = 8;
+      const countdownElement = document.getElementById('countdown');
+      const redirectText = document.getElementById('redirect-text');
+      let countdownTimer;
+      
+      // Función para cancelar redirección automática
+      function cancelAutoRedirect() {
+        if (countdownTimer) {
+          clearInterval(countdownTimer);
+          redirectText.innerHTML = '⏸️ Redirección cancelada - Navega cuando quieras';
+          redirectText.style.opacity = '0.6';
+        }
+        if (window.redirectTimer) {
+          clearTimeout(window.redirectTimer);
+        }
+      }
+      
+      // Cancelar redirección si el usuario interactúa
+      document.addEventListener('click', cancelAutoRedirect);
+      document.addEventListener('keypress', cancelAutoRedirect);
+      
+      countdownTimer = setInterval(() => {
+        count--;
+        countdownElement.textContent = count;
+        
+        if (count <= 0) {
+          clearInterval(countdownTimer);
+          redirectText.innerHTML = '🚀 ¡Redirigiendo ahora...!';
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
