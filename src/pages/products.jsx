@@ -1,4 +1,4 @@
-// src/pages/Products.jsx
+
 import React from "react";
 import { Container, Typography, useTheme, Box } from "@mui/material";
 import ProductList from "../components/ProductList";

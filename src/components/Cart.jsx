@@ -59,7 +59,6 @@ export default function Cart({
           position: "relative"
         }}
       >
-        {/* Header del carrito con glassmorphism */}
         <Box 
           sx={{
             background: theme.palette.mode === 'dark'
@@ -118,7 +117,6 @@ export default function Cart({
           </IconButton>
         </Box>
 
-        {/* Sección del total con glassmorphism */}
         <Paper
           elevation={0}
           sx={{
@@ -176,7 +174,6 @@ export default function Cart({
           />
         </Paper>
 
-        {/* Contenido principal del carrito */}
         <Box 
           sx={{ 
             flexGrow: 1, 
@@ -416,7 +413,6 @@ export default function Cart({
           )}
         </Box>
 
-        {/* Footer del carrito con glassmorphism */}
         {items.length > 0 && (
           <Box 
             sx={{
@@ -438,7 +434,7 @@ export default function Cart({
               fullWidth
               onClick={clearCart}
               sx={{
-                borderRadius: "999px", // Pill shape como todos los botones
+                borderRadius: "999px", 
                 py: 1.8,
                 fontSize: "1rem",
                 fontWeight: "bold",

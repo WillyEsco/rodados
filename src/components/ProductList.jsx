@@ -19,7 +19,6 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import spinnerImage from "../assets/spinner.png";
 
-// Estilos MD3 para Card y Button - Glassmorphism como Home
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
   background: theme.palette.mode === 'dark' 
@@ -57,7 +56,6 @@ export default function ProductList({ onAddToCart, cartItems = [] }) {
       .catch((err) => console.error("Error al cargar productos:", err));
   }, []);
 
-  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
@@ -156,7 +154,7 @@ export default function ProductList({ onAddToCart, cartItems = [] }) {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: 180, // Altura fija para el contenido
+                height: 180,
                 p: 2
               }}>
                 <Box sx={{ height: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>

@@ -51,7 +51,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
         flexDirection: "column"
       }}
     >
-      {/* Header del drawer */}
       <Box 
         sx={{ 
           background: theme.palette.mode === 'dark'
@@ -63,7 +62,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
           boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
         }}
       >
-        {/* Botón cerrar X igual que el carrito */}
         <IconButton 
           onClick={handleDrawerToggle}
           sx={{
@@ -97,7 +95,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
         />
       </Box>
 
-      {/* Lista de navegación */}
       <List sx={{ flexGrow: 1, pt: 2 }}>
         {navItems.map((item) => (
           <ListItem
@@ -160,7 +157,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
         ))}
       </List>
 
-      {/* Footer del drawer */}
       <Box 
         sx={{ 
           p: 2,
@@ -176,7 +172,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
           gap: 2
         }}
       >
-        {/* Theme Toggle en drawer móvil */}
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 1 }}>
           <Typography variant="body2" sx={{ color: "text.secondary", fontWeight: 500 }}>
             Tema:
@@ -211,7 +206,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          {/* Logo izquierda */}
           <Box
             component={Link}
             to="/"
@@ -257,7 +251,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
             />
           </Box>
 
-          {/* Menú escritorio derecha */}
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
             {navItems.map((item) => (
               <Button
@@ -277,10 +270,8 @@ export default function Header({ onCartClick, cartItems = [] }) {
               </Button>
             ))}
 
-            {/* Theme Toggle - Desktop */}
             <ThemeToggle color="inherit" />
 
-            {/* Carrito (icono siempre visible en desktop) */}
             <Badge
               badgeContent={cartItems.length}
               sx={{
@@ -309,9 +300,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
             </Badge>
           </Box>
 
-          {/* Menú móvil */}
           <Box sx={{ display: { xs: "flex", sm: "none" }, gap: 1 }}>
-            {/* Carrito móvil - siempre visible */}
             <Badge
               badgeContent={cartItems.length}
               sx={{
@@ -339,7 +328,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
               </IconButton>
             </Badge>
             
-            {/* Menú hamburguesa */}
             <IconButton color="inherit" onClick={handleDrawerToggle}>
               <MenuIcon />
             </IconButton>
@@ -347,7 +335,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
         </Toolbar>
       </AppBar>
 
-      {/* Drawer móvil */}
       <Drawer
         anchor="right"
         open={mobileOpen}

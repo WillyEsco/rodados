@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState, useEffect } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
@@ -9,7 +8,6 @@ import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import BottomNavigation from "./components/BottomNavigation";
 
-// Pages
 import Home from "./pages/home";
 import Products from "./pages/products";       
 import ProductDetail from "./pages/productDetails"; 
@@ -19,18 +17,15 @@ export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
-  // ✅ Cargar carrito desde localStorage
   useEffect(() => {
     const savedCart = localStorage.getItem("cartItems");
     if (savedCart) setCartItems(JSON.parse(savedCart));
   }, []);
 
-  // ✅ Guardar carrito en localStorage
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // ✅ Funciones del carrito
   const addToCart = (product) => {
     setCartItems((prev) => {
       const itemExists = prev.find((item) => item.id === product.id);
@@ -75,10 +70,8 @@ export default function App() {
     <ThemeProvider>
       <Router>
         <Box display="flex" flexDirection="column" minHeight="100vh">
-          {/* 🔹 Header fijo en todas las páginas */}
           <Header onCartClick={() => setCartOpen(true)} cartItems={cartItems} />
 
-        {/* 🔹 Contenido dinámico según ruta */}
         <Box component="main" flexGrow={1} p={2}>
           <Routes>
             <Route 
@@ -123,18 +116,15 @@ export default function App() {
           </Routes>
         </Box>
 
-        {/* 🔹 Footer - Solo visible en desktop */}
         <Box sx={{ display: { xs: 'none', md: 'block' } }}>
           <Footer />
         </Box>
 
-        {/* 🔹 Bottom Navigation - Solo visible en móvil */}
         <BottomNavigation 
           onCartClick={() => setCartOpen(true)}
           cartItems={cartItems}
         />
 
-        {/* 🔹 Drawer del carrito */}
         <Cart
           open={cartOpen}
           onClose={() => setCartOpen(false)}
@@ -145,9 +135,8 @@ export default function App() {
           clearCart={clearCart}
         />
 
-        {/* 🔹 Padding bottom para móvil - evita que el contenido se oculte detrás del BottomNav */}
         <Box sx={{ 
-          height: { xs: 70, md: 0 },  // Altura del BottomNavigation
+          height: { xs: 70, md: 0 },  
           display: { xs: 'block', md: 'none' }
         }} />
         </Box>
