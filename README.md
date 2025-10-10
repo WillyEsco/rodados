@@ -96,15 +96,14 @@
 ### 🛒 **CARRITO PREMIUM**
 *Experiencia de compra que convierte visitantes en clientes*
 
-<img src="https://fabystudios.github.io/Rodados/assets/cart-open4.png" alt="Shopping Cart Premium" width="30%" style="max-width: 400px; height: auto;"/>
+![hopping Cart Premium](https://fabystudios.github.io/Rodados/assets/cart-open4.png)
 
 ---
 
 ### 📱 **NAVEGACIÓN ATÓMICA**
 *Bottom Navigation con posicionamiento matemático perfecto*
 
-<!-- ![Mobile Navigation](https://fabystudios.github.io/Rodados/assets/mobile-nav.png) -->
-<img src="https://fabystudios.github.io/Rodados/assets/mobile-nav.png" alt="Mobile Navigation" width="30%" style="max-width: 400px; height: auto;"/>
+![Mobile Navigation](https://fabystudios.github.io/Rodados/assets/mobile-nav.png)
 
 ---
 
