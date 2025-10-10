@@ -20,17 +20,42 @@ import HomeIcon from "@mui/icons-material/Home";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import { useAuth } from "../contexts/AuthContext";
+import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Login from "./Login";
 import logoPpal from "../assets/logo-ppal.png";
 import logoBackup from "../assets/logo-backup.png";
 import textoMarca from "../assets/texto-marca.png";
 
 export default function Header({ onCartClick, cartItems = [] }) {
   const theme = useTheme();
+  const { user, isAuthenticated, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const location = useLocation(); // 👈 detecta ruta activa
+  
+  // Calcular total de unidades en el carrito (como MercadoLibre)
+  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleUserIconClick = () => {
+    console.log('🔍 [DEBUG] User icon clicked - Auth state:', {
+      isAuthenticated: isAuthenticated(),
+      user: user,
+      userAgent: navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'
+    });
+    
+    if (isAuthenticated()) {
+      console.log('🚪 [DEBUG] Logging out user:', user?.username);
+      logout();
+    } else {
+      console.log('🔑 [DEBUG] Opening login modal');
+      setShowLogin(true);
+    }
   };
 
   const navItems = [
@@ -51,6 +76,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
         flexDirection: "column"
       }}
     >
+      {/* Header del drawer */}
       <Box 
         sx={{ 
           background: theme.palette.mode === 'dark'
@@ -62,6 +88,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
           boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
         }}
       >
+        {/* Botón cerrar X igual que el carrito */}
         <IconButton 
           onClick={handleDrawerToggle}
           sx={{
@@ -90,11 +117,24 @@ export default function Header({ onCartClick, cartItems = [] }) {
           onError={(e) => {e.target.src = logoBackup}}
           sx={{ 
             height: 65,
-            filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.2))"
+            filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.2))",
+            transition: "transform 0.4s",
+            cursor: "pointer",
+            "&:hover": {
+              animation: "swingMobile 0.7s",
+            },
+            "@keyframes swingMobile": {
+              "20%": { transform: "rotate(15deg)" },
+              "40%": { transform: "rotate(-10deg)" },
+              "60%": { transform: "rotate(5deg)" },
+              "80%": { transform: "rotate(-5deg)" },
+              "100%": { transform: "rotate(0deg)" },
+            },
           }}
         />
       </Box>
 
+      {/* Lista de navegación */}
       <List sx={{ flexGrow: 1, pt: 2 }}>
         {navItems.map((item) => (
           <ListItem
@@ -157,6 +197,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
         ))}
       </List>
 
+      {/* Footer del drawer */}
       <Box 
         sx={{ 
           p: 2,
@@ -172,6 +213,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
           gap: 2
         }}
       >
+        {/* Theme Toggle en drawer móvil */}
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 1 }}>
           <Typography variant="body2" sx={{ color: "text.secondary", fontWeight: 500 }}>
             Tema:
@@ -206,6 +248,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          {/* Logo izquierda */}
           <Box
             component={Link}
             to="/"
@@ -251,6 +294,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
             />
           </Box>
 
+          {/* Menú escritorio derecha */}
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
             {navItems.map((item) => (
               <Button
@@ -270,10 +314,36 @@ export default function Header({ onCartClick, cartItems = [] }) {
               </Button>
             ))}
 
+            {/* Theme Toggle - Desktop */}
             <ThemeToggle color="inherit" />
 
+            {/* Indicador de usuario - Desktop */}
+            {isAuthenticated() && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mx: 1 }}>
+                <PersonIcon sx={{ color: 'white', fontSize: 20 }} />
+                <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>
+                  {user.username}
+                </Typography>
+                <IconButton
+                  size="small"
+                  onClick={logout}
+                  sx={{
+                    color: 'white',
+                    ml: 0.5,
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                    }
+                  }}
+                  title="Cerrar sesión"
+                >
+                  <LogoutIcon fontSize="small" />
+                </IconButton>
+              </Box>
+            )}
+
+            {/* Carrito (icono siempre visible en desktop) */}
             <Badge
-              badgeContent={cartItems.length}
+              badgeContent={cartItemCount}
               sx={{
                 "& .MuiBadge-badge": {
                   background: "linear-gradient(45deg, #ff1744, #d50000)",
@@ -285,7 +355,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
                   borderRadius: "10px",
                   border: "2px solid white",
                   boxShadow: "0 2px 6px rgba(255, 23, 68, 0.4)",
-                  animation: cartItems.length > 0 ? "cartPulse 2s infinite" : "none",
+                  animation: cartItemCount > 0 ? "cartPulse 2s infinite" : "none",
                   "@keyframes cartPulse": {
                     "0%": { transform: "scale(1)" },
                     "50%": { transform: "scale(1.15)" },
@@ -298,36 +368,81 @@ export default function Header({ onCartClick, cartItems = [] }) {
                 <ShoppingCartIcon />
               </IconButton>
             </Badge>
-          </Box>
 
-          <Box sx={{ display: { xs: "flex", sm: "none" }, gap: 1 }}>
-            <Badge
-              badgeContent={cartItems.length}
+            {/* Icono de usuario - Desktop (como última opción) */}
+            <IconButton 
+              color="inherit"
+              onClick={handleUserIconClick}
               sx={{
-                "& .MuiBadge-badge": {
-                  background: "linear-gradient(45deg, #ff1744, #d50000)",
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: "0.7rem",
-                  minWidth: "18px",
-                  height: "18px",
-                  borderRadius: "9px",
-                  border: "2px solid white",
-                  boxShadow: "0 2px 6px rgba(255, 23, 68, 0.4)",
-                  animation: cartItems.length > 0 ? "cartPulseMobile 2s infinite" : "none",
-                  "@keyframes cartPulseMobile": {
-                    "0%": { transform: "scale(1)" },
-                    "50%": { transform: "scale(1.2)" },
-                    "100%": { transform: "scale(1)" }
-                  }
+                color: isAuthenticated() 
+                  ? '#66BB6A' // Verde brillante cuando logueado (visible en ambos temas)
+                  : theme.palette.mode === 'dark' 
+                    ? 'rgba(255, 255, 255, 0.8)' // Blanco más visible en modo dark
+                    : 'rgba(255, 255, 255, 0.95)', // Blanco casi opaco en modo light
+                ml: 1,
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  transform: 'scale(1.1)',
+                  color: isAuthenticated() 
+                    ? '#81C784' // Verde más claro al hover cuando logueado
+                    : 'rgba(255, 255, 255, 1)' // Blanco total al hover cuando deslogueado
                 }
               }}
+              title={isAuthenticated() ? `Cerrar sesión (${user?.username})` : 'Iniciar sesión'}
             >
-              <IconButton color="inherit" onClick={onCartClick}>
-                <ShoppingCartIcon />
-              </IconButton>
-            </Badge>
+              <PersonIcon />
+            </IconButton>
+          </Box>
+
+          {/* Menú móvil */}
+          <Box sx={{ display: { xs: "flex", sm: "none" }, gap: 1, alignItems: 'center' }}>
+            {/* Indicador de usuario móvil con nombre si está logueado */}
+            {isAuthenticated() && (
+              <Typography 
+                variant="caption" 
+                sx={{ 
+                  color: 'white', 
+                  fontWeight: 600,
+                  fontSize: '0.7rem',
+                  maxWidth: '80px',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {user?.username?.split(' ')[0]}
+              </Typography>
+            )}
             
+            {/* Icono de usuario móvil - Login/Logout funcional */}
+            <IconButton 
+              color="inherit"
+              onClick={handleUserIconClick}
+              sx={{
+                color: isAuthenticated() 
+                  ? '#66BB6A' // Verde brillante cuando logueado (visible en ambos temas)
+                  : theme.palette.mode === 'dark' 
+                    ? 'rgba(255, 255, 255, 0.8)' // Blanco más visible en modo dark
+                    : 'rgba(255, 255, 255, 0.95)', // Blanco casi opaco en modo light
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                position: 'relative',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  transform: 'scale(1.1)',
+                  color: isAuthenticated() 
+                    ? '#81C784' // Verde más claro al hover cuando logueado
+                    : 'rgba(255, 255, 255, 1)' // Blanco total al hover cuando deslogueado
+                }
+              }}
+              title={isAuthenticated() ? `Cerrar sesión (${user?.username})` : 'Iniciar sesión'}
+            >
+              <PersonIcon />
+            </IconButton>
+            
+            {/* Menú hamburguesa */}
             <IconButton color="inherit" onClick={handleDrawerToggle}>
               <MenuIcon />
             </IconButton>
@@ -335,6 +450,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
         </Toolbar>
       </AppBar>
 
+      {/* Drawer móvil */}
       <Drawer
         anchor="right"
         open={mobileOpen}
@@ -349,6 +465,14 @@ export default function Header({ onCartClick, cartItems = [] }) {
       >
         {drawer}
       </Drawer>
+
+      {/* Modal de Login desde Header */}
+      {showLogin && (
+        <Login 
+          onClose={() => setShowLogin(false)}
+          onLoginSuccess={() => setShowLogin(false)}
+        />
+      )}
     </>
   );
 }

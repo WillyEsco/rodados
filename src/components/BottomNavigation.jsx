@@ -1,3 +1,4 @@
+// src/components/BottomNavigation.jsx
 import React from "react";
 import { 
   Box, 
@@ -20,6 +21,7 @@ export default function BottomNavigation({ onCartClick, cartItems = [] }) {
   const location = useLocation();
   const theme = useTheme();
 
+  // Determinar el valor activo basado en la ruta actual
   const getCurrentValue = () => {
     const path = location.pathname;
     if (path === "/") return "home";
@@ -30,6 +32,7 @@ export default function BottomNavigation({ onCartClick, cartItems = [] }) {
 
 
 
+  // Calcular total de unidades en el carrito (como MercadoLibre)
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
@@ -63,6 +66,7 @@ export default function BottomNavigation({ onCartClick, cartItems = [] }) {
         position: 'relative',
         width: '100%'
       }}>
+        {/* Inicio - Extremo izquierdo */}
         <Box sx={{ 
           position: 'absolute',
           left: '0%',
@@ -108,6 +112,7 @@ export default function BottomNavigation({ onCartClick, cartItems = [] }) {
           </Typography>
         </Box>
 
+        {/* Productos - Equidistante entre Inicio y Carrito */}
         <Box sx={{ 
           position: 'absolute',
           left: '25%',
@@ -153,6 +158,7 @@ export default function BottomNavigation({ onCartClick, cartItems = [] }) {
           </Typography>
         </Box>
 
+        {/* Carrito Central - Exactamente en el centro */}
         <Box sx={{
           position: 'absolute',
           left: '50%',
@@ -203,6 +209,7 @@ export default function BottomNavigation({ onCartClick, cartItems = [] }) {
           </Fab>
         </Box>
 
+        {/* Nosotros - Equidistante entre Carrito y Atrás */}
         <Box sx={{ 
           position: 'absolute',
           left: '75%',
@@ -248,6 +255,7 @@ export default function BottomNavigation({ onCartClick, cartItems = [] }) {
           </Typography>
         </Box>
           
+        {/* Atrás - Extremo derecho */}
         <Box sx={{ 
           position: 'absolute',
           right: '0%',
@@ -294,6 +302,7 @@ export default function BottomNavigation({ onCartClick, cartItems = [] }) {
         </Box>
       </Box>
 
+      {/* Animaciones CSS */}
       <style jsx global>{`
         @keyframes pulse {
           0%, 100% { transform: scale(1); }

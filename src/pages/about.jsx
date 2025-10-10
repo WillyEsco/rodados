@@ -1,3 +1,4 @@
+// src/pages/About.jsx
 import React, { useState } from "react";
 import { 
   Box, 
@@ -51,8 +52,10 @@ export default function About() {
         : 'linear-gradient(135deg, #f3e5f5 0%, #e1bee7 30%, #ce93d8 70%, #ba68c8 100%)',
       py: { xs: 4, md: 8 }
     }}>
+      {/* Hero Section con Logo y Mascotas */}
       <Container maxWidth="xl" sx={{ mb: 8 }}>
         <Box sx={{ textAlign: 'center', position: 'relative' }}>
+          {/* Mascota izquierda flotante */}
           <Box sx={{
             position: 'absolute',
             left: { xs: '5%', md: '10%' },
@@ -73,6 +76,7 @@ export default function About() {
             />
           </Box>
 
+          {/* Mascota derecha flotante */}
           <Box sx={{
             position: 'absolute',
             right: { xs: '5%', md: '10%' },
@@ -93,6 +97,7 @@ export default function About() {
             />
           </Box>
 
+          {/* Logo Principal */}
           <Box sx={{ mb: 4, position: 'relative', zIndex: 3 }}>
             <img
               src={logotipoTop}
@@ -107,6 +112,7 @@ export default function About() {
             />
           </Box>
 
+          {/* Badges decorativos */}
           <Stack 
             direction={{ xs: 'column', sm: 'row' }} 
             spacing={2} 
@@ -147,6 +153,7 @@ export default function About() {
             />
           </Stack>
 
+          {/* Descripción mejorada */}
           <Typography
             variant="h5"
             align="center"
@@ -182,6 +189,7 @@ export default function About() {
         </Box>
       </Container>
 
+      {/* Sección de Cards Mejoradas */}
       <Container maxWidth="lg" sx={{ mb: 6 }}>
         <Typography
           variant="h3"
@@ -227,6 +235,7 @@ export default function About() {
                   : '0 25px 50px rgba(138, 43, 226, 0.2)'
               }
             }}>
+              {/* Badge decorativo */}
               <Box sx={{
                 position: 'absolute',
                 top: 15,
@@ -366,6 +375,7 @@ export default function About() {
           </Grid>
         </Grid>
 
+        {/* Mascota central móvil */}
         <Box sx={{
           textAlign: 'center',
           mt: 6,
@@ -384,6 +394,7 @@ export default function About() {
         </Box>
       </Container>
 
+      {/* Modal para mostrar imagen en pantalla completa */}
       <Modal
         open={modalOpen}
         onClose={handleCloseModal}
@@ -404,7 +415,7 @@ export default function About() {
             justifyContent: "center",
             outline: "none"
           }}
-          onClick={handleCloseModal} 
+          onClick={handleCloseModal} // 🔹 Cerrar al hacer clic en el fondo
         >
           <IconButton
             onClick={handleCloseModal}
@@ -412,15 +423,15 @@ export default function About() {
               position: "absolute",
               top: 20,
               right: 20,
-              bgcolor: "#ff1744", 
+              bgcolor: "#ff1744", // 🔹 Fondo rojo para mejor visibilidad
               color: "white",
-              border: "2px solid white",
+              border: "2px solid white", // 🔹 Borde blanco para contraste
               "&:hover": {
-                bgcolor: "#d50000", 
-                transform: "scale(1.1)" 
+                bgcolor: "#d50000", // 🔹 Rojo más oscuro en hover
+                transform: "scale(1.1)" // 🔹 Efecto de agrandamiento
               },
               zIndex: 1,
-              transition: "all 0.3s ease" 
+              transition: "all 0.3s ease" // 🔹 Transición suave
             }}
           >
             <CloseIcon />
@@ -438,11 +449,12 @@ export default function About() {
               borderRadius: "8px",
               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)"
             }}
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()} // 🔹 Evitar cerrar al hacer clic en la imagen
           />
         </Box>
       </Modal>
 
+      {/* Estilos CSS para las animaciones */}
       <style jsx global>{`
         @keyframes floatLeft {
           0%, 100% { transform: translateY(0px) rotate(-10deg); }

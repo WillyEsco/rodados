@@ -142,6 +142,23 @@
 | 📱 **Atomic Navigation** | Bottom Nav con posicionamiento matemático | ✅ |
 | 🎨 **Glassmorphism UI** | Efectos cristal en toda la app | ✅ |
 | 🔄 **Micro-animations** | Transiciones fluidas everywhere | ✅ |
+| 🔐 **Sistema Autenticación** | Login social + persistencia completa | ✅ |
+| 👤 **Gestión Usuarios** | Perfiles persistentes por provider | ✅ |
+
+<div align="center">
+
+### 🔐 **AUTENTICACIÓN & USUARIOS**
+
+</div>
+
+| Feature | Tecnología | Estado |
+|:---|:---|:---:|
+| 🔑 **Social Login** | Google, Facebook, Instagram, Twitter | ✅ |
+| 👤 **Perfiles Realistas** | Usuarios hispanos con datos reales | ✅ |
+| 💾 **Persistencia** | LocalStorage por provider | ✅ |
+| 🎨 **UI Glassmorphism** | Modal login con efectos cristal | ✅ |
+| 📱 **Mobile Optimized** | Iconos responsivos + UX móvil | ✅ |
+| 🔄 **Estado Reactivo** | Context API + hooks personalizados | ✅ |
 
 <div align="center">
 
@@ -186,7 +203,137 @@
 
 ---
 
-## 🚫 **PÁGINA 404 PERSONALIZADA**
+## � **SISTEMA DE AUTENTICACIÓN COMPLETO**
+
+<div align="center">
+
+### 👥 **Login Social Premium**
+
+![Sistema de Autenticación](https://rodados-eshop-beta.vercel.app/assets/login-system.png)
+
+</div>
+
+Implementamos un sistema de autenticación completo con **login social** y **persistencia inteligente**:
+
+### ✨ **Características del Sistema:**
+
+| Feature | Descripción | Tecnología |
+|:---|:---|:---:|
+| 🔑 **Multi-Provider** | Google, Facebook, Instagram, Twitter | Social Auth Simulation |
+| 👤 **Usuarios Realistas** | Nombres hispanos y emails diversos | MockData con Arrays |
+| 💾 **Persistencia Inteligente** | Mismo usuario por provider | LocalStorage Strategy |
+| 🎨 **UI Glassmorphism** | Modal cristalino con efectos | Backdrop-filter + CSS |
+| 📱 **Mobile First** | Optimizado para touch devices | Responsive Design |
+| 🔄 **Estado Reactivo** | Cambios instantáneos en UI | React Context API |
+
+### 🎯 **Flujo de Autenticación:**
+
+```javascript
+// 🔐 Proceso de login social
+const AuthFlow = {
+  1: "Usuario hace click en provider (Google, Facebook, etc.)",
+  2: "Sistema verifica si existe usuario guardado para ese provider",
+  3: "Primera vez: Genera usuario aleatorio de lista realista", 
+  4: "Próximas veces: Recupera mismo usuario del localStorage",
+  5: "UI se actualiza instantáneamente mostrando estado autenticado",
+  6: "Persistencia garantizada entre sesiones del navegador"
+}
+```
+
+### 👤 **Base de Datos de Usuarios:**
+
+<div align="center">
+
+**🎭 Usuarios Realistas por Provider**
+
+</div>
+
+| Provider | Ejemplos de Usuarios | Domain |
+|:---|:---|:---:|
+| 🔵 **Google** | Juan Pérez, Laura Martínez, Diego Silva | @gmail.com |
+| 🔷 **Facebook** | María González, Alejandro Fernández | @outlook.com |
+| 🟣 **Instagram** | Carlos Rodríguez, Isabella Morales | @hotmail.com |
+| 🔵 **Twitter** | Ana Martínez, Rodrigo Jiménez | @yahoo.com |
+
+### 🔧 **Configuración Técnica:**
+
+```jsx
+// 🎯 AuthContext - Corazón del sistema
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  
+  // 💾 Persistencia automática
+  useEffect(() => {
+    const savedUser = localStorage.getItem('authUser');
+    if (savedUser) setUser(JSON.parse(savedUser));
+  }, []);
+
+  // 🔑 Login con provider social
+  const loginWithProvider = async (provider) => {
+    // Verificar usuario existente o crear nuevo
+    const savedUserKey = `auth_${provider}_user`;
+    const existingUser = localStorage.getItem(savedUserKey);
+    
+    if (existingUser) {
+      return JSON.parse(existingUser); // Usuario consistente
+    } else {
+      return generateNewUser(provider); // Nuevo usuario realista
+    }
+  };
+};
+```
+
+### 🎨 **Componentes de UI:**
+
+<div align="center">
+
+**🎪 Modal de Login con Glassmorphism**
+
+</div>
+
+- 🎭 **Animaciones de entrada/salida** suaves
+- 🎨 **Efectos cristal** con backdrop-filter
+- 📱 **Diseño responsive** para todos los dispositivos
+- 🔄 **Loading states** elegantes durante autenticación
+- ✅ **Feedback visual** inmediato de éxito/error
+- 🌈 **Adaptación automática** a tema claro/oscuro
+
+### 📱 **Experiencia Móvil:**
+
+<div align="center">
+
+**👆 Touch-Optimized Authentication**
+
+</div>
+
+- 🎯 **Iconos de usuario** responsivos en header
+- 👤 **Indicador visual** del estado de login (verde = logueado)
+- 📱 **Nombre de usuario** visible en mobile cuando está autenticado
+- ⚡ **Logout rápido** con un toque en el icono
+- 🔄 **Animaciones** que confirman las acciones del usuario
+
+### 🛠️ **Herramientas de Debugging:**
+
+Durante desarrollo incluimos **DebugAuth Component**:
+
+- 🔍 **Panel flotante** con info de autenticación
+- 👤 **Datos del usuario** en tiempo real
+- 🔄 **Botones de logout/reset** para testing
+- 📊 **Estado de localStorage** visible
+- 🧪 **Reset de providers** para probar usuarios frescos
+
+### 🔒 **Seguridad & Mejores Prácticas:**
+
+- ✅ **Validación de datos** en frontend
+- ✅ **Escape de caracteres** en nombres de usuario
+- ✅ **Limpieza de localStorage** cuando hay errores
+- ✅ **Fallbacks** para casos edge
+- ✅ **Error handling** elegante sin crashes
+- ✅ **Preparado para JWT** cuando se integre backend real
+
+---
+
+## �🚫 **PÁGINA 404 PERSONALIZADA**
 
 <div align="center">
 
@@ -314,11 +461,11 @@ Implementamos meta tags Open Graph completos para previews perfectos en WhatsApp
 
 ### 🚀 **¡Probá la App AHORA MISMO!**
 
-**🔗 URL OFICIAL:** [`https://rodados-eshop-beta.vercel.app/`](https://rodados-eshop-beta.vercel.app/)
+**🔗 URL OFICIAL:** [`https://rodados-eshop.vercel.app/`](https://rodados-eshop.vercel.app/)
 
 <br>
 
-[![🚀 Ver Demo Live](https://img.shields.io/badge/🚀_DEMO_LIVE-rodados--eshop--beta.vercel.app-00C7B7?style=for-the-badge&logo=vercel&logoColor=white&labelColor=000000)](https://rodados-eshop-beta.vercel.app/)
+[![🚀 Ver Demo Live](https://img.shields.io/badge/🚀_DEMO_LIVE-rodados--eshop.vercel.app-00C7B7?style=for-the-badge&logo=vercel&logoColor=white&labelColor=000000)](https://rodados-eshop.vercel.app/)
 
 <br>
 
@@ -673,7 +820,8 @@ const ThemeConfig = {
 
 | Feature | Status | Impacto |
 |:---|:---:|:---|
-| 🔐 **JWT Authentication** | 🔄 Planning | Sistema login premium |
+| 🔐 **Social Authentication** | ✅ **Completado** | Sistema login premium |
+| 🔐 **JWT Backend Integration** | 🔄 Planning | Autenticación servidor real |
 | 💳 **Stripe Integration** | 🔄 Planning | Pagos reales seguros |
 | 👑 **Admin Dashboard** | 🔄 Planning | Control total products |
 | ❤️ **Wishlist System** | 🔄 Planning | Productos favoritos |
@@ -758,8 +906,8 @@ git push origin feature/mi-idea-genial
 <br>
 
 [![📧 Email](https://img.shields.io/badge/📧_Email-willyEscobar@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:willyEscobar@gmail.com)
-[![🐙 GitHub](https://img.shields.io/badge/🐙_GitHub-willyesco-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/willyesco)
-[![💼 LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fabesco)
+[![🐙 GitHub](https://img.shields.io/badge/🐙_GitHub-fabystudios-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fabystudios)
+[![💼 LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/tu-perfil)
 
 <br>
 
@@ -854,3 +1002,5 @@ SOFTWARE.
 <br>
 
 </div>
+
+<!-- Deploy trigger - Dev preview fix attempt - Thu, Oct  9, 2025 14:52:00 -->

@@ -59,6 +59,7 @@ export default function Cart({
           position: "relative"
         }}
       >
+        {/* Header del carrito con glassmorphism */}
         <Box 
           sx={{
             background: theme.palette.mode === 'dark'
@@ -117,6 +118,7 @@ export default function Cart({
           </IconButton>
         </Box>
 
+        {/* Sección del total con glassmorphism */}
         <Paper
           elevation={0}
           sx={{
@@ -174,6 +176,7 @@ export default function Cart({
           />
         </Paper>
 
+        {/* Contenido principal del carrito */}
         <Box 
           sx={{ 
             flexGrow: 1, 
@@ -413,6 +416,7 @@ export default function Cart({
           )}
         </Box>
 
+        {/* Footer del carrito con glassmorphism */}
         {items.length > 0 && (
           <Box 
             sx={{
@@ -429,22 +433,70 @@ export default function Cart({
                 : '0 -4px 16px rgba(0, 0, 0, 0.1)',
             }}
           >
+            {/* Botón COMPRAR prominente */}
             <Button
               variant="contained"
               fullWidth
+              onClick={() => {
+                // Esta función será sobrescrita por ProtectedRoute si no está autenticado
+                if (window.handlePurchase) {
+                  window.handlePurchase();
+                }
+              }}
+              sx={{
+                borderRadius: "20px",
+                py: 2.5,
+                fontSize: "1.3rem",
+                fontWeight: "bold",
+                mb: 2,
+                background: "linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%)",
+                color: 'white',
+                boxShadow: '0 6px 20px rgba(76, 175, 80, 0.4)',
+                border: '2px solid rgba(255, 255, 255, 0.2)',
+                position: 'relative',
+                overflow: 'hidden',
+                "&:hover": {
+                  background: "linear-gradient(135deg, #66bb6a 0%, #4caf50 50%, #388e3c 100%)",
+                  transform: "translateY(-3px)",
+                  boxShadow: "0 8px 25px rgba(76, 175, 80, 0.5)",
+                  '&::before': {
+                    transform: 'translateX(100%)'
+                  }
+                },
+                "&:active": {
+                  transform: "translateY(-1px)"
+                },
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: '-100%',
+                  width: '100%',
+                  height: '100%',
+                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                  transition: 'transform 0.6s ease'
+                },
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+              }}
+            >
+              🛒 COMPRAR AHORA - ${total}
+            </Button>
+
+            <Button
+              variant="outlined"
+              fullWidth
               onClick={clearCart}
               sx={{
-                borderRadius: "999px", 
-                py: 1.8,
-                fontSize: "1rem",
-                fontWeight: "bold",
-                background: "linear-gradient(45deg, #ff4757, #ff6b6b)",
-                color: 'white',
-                boxShadow: '0 4px 16px rgba(255, 71, 87, 0.3)',
+                borderRadius: "16px",
+                py: 1.5,
+                fontSize: "0.95rem",
+                fontWeight: "600",
+                borderColor: "#ff4757",
+                color: "#ff4757",
                 "&:hover": {
-                  background: "linear-gradient(45deg, #ff3742, #ff5252)",
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 6px 20px rgba(255, 71, 87, 0.4)"
+                  borderColor: "#ff4757",
+                  backgroundColor: "rgba(255, 71, 87, 0.1)",
+                  transform: "translateY(-1px)",
                 },
                 "&:active": {
                   transform: "translateY(0px)"

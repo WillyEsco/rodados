@@ -19,6 +19,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import spinnerImage from "../assets/spinner.png";
 
+// Estilos MD3 para Card y Button - Glassmorphism como Home
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
   background: theme.palette.mode === 'dark' 
@@ -45,17 +46,42 @@ const StyledCard = styled(Card)(({ theme }) => ({
 
 
 
-export default function ProductList({ onAddToCart, cartItems = [] }) {
+export default function ProductList({ onAddToCart, cartItems = [], categoryFilter = 'todo' }) {
   const theme = useTheme();
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     fetch("https://68362e14664e72d28e401640.mockapi.io/producto")
       .then((res) => res.json())
-      .then((data) => setProducts(data))
+      .then((data) => {
+        setProducts(data);
+        setFilteredProducts(data); // Inicialmente mostrar todos
+      })
       .catch((err) => console.error("Error al cargar productos:", err));
   }, []);
 
+  // Filtrar productos según la categoría seleccionada
+  useEffect(() => {
+    if (categoryFilter === 'todo') {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter(product => {
+        const productCategory = product.category?.toLowerCase();
+        const filterCategory = categoryFilter.toLowerCase();
+        
+        // Mapear "adultos" a "adult" para coincidir con la API
+        if (filterCategory === 'adultos') {
+          return productCategory === 'adult';
+        }
+        // Para "kids" funciona directo
+        return productCategory === filterCategory;
+      });
+      setFilteredProducts(filtered);
+    }
+  }, [products, categoryFilter]);
+
+  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
@@ -63,7 +89,7 @@ export default function ProductList({ onAddToCart, cartItems = [] }) {
 
   return (
     <Grid container spacing={3} justifyContent="center">
-      {products.length === 0 ? (
+      {filteredProducts.length === 0 ? (
         <Box sx={{ width: "100%", textAlign: "center", mt: 2 }}>
           <Typography variant="h6" sx={{ 
             mb: 2, 
@@ -81,7 +107,7 @@ export default function ProductList({ onAddToCart, cartItems = [] }) {
           />
         </Box>
       ) : (
-        products.map((product) => (
+        filteredProducts.map((product) => (
           <Grid
             item
             xs={12}
@@ -154,7 +180,7 @@ export default function ProductList({ onAddToCart, cartItems = [] }) {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: 180,
+                height: 180, // Altura fija para el contenido
                 p: 2
               }}>
                 <Box sx={{ height: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -188,7 +214,7 @@ export default function ProductList({ onAddToCart, cartItems = [] }) {
                     variant="outlined"
                     fullWidth
                     component={Link}
-                    to={`/productos/${product.id}`}
+                    to={`/productos/${product.category?.toLowerCase() === 'adult' ? 'adultos' : product.category?.toLowerCase() || 'general'}/${product.id}`}
                     sx={{
                       borderColor: '#1976d2',
                       color: '#1976d2',

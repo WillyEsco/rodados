@@ -1,4 +1,4 @@
-
+// src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
 import { 
   Box, 
@@ -47,19 +47,19 @@ export default function Home({ onAddToCart, cartItems = [] }) {
     }
   ];
 
- 
+  // Cargar productos destacados de la API
   useEffect(() => {
     fetch("https://68362e14664e72d28e401640.mockapi.io/producto")
       .then((res) => res.json())
       .then((data) => {
-      
+        // Seleccionar 3 productos aleatorios
         const shuffled = data.sort(() => 0.5 - Math.random());
         setFeaturedProducts(shuffled.slice(0, 3));
       })
       .catch((err) => console.error("Error al cargar productos destacados:", err));
   }, []);
 
- 
+  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
@@ -72,13 +72,13 @@ export default function Home({ onAddToCart, cartItems = [] }) {
         ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
         : 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%)'
     }}>
-     
+      {/* Hero Section */}
       <Container maxWidth="xl" sx={{ pt: { xs: 4, md: 8 }, pb: 6 }}>
         <Grid container spacing={{ xs: 2, md: 2 }} alignItems="center" sx={{ minHeight: { md: '500px' } }}>
           <Grid item xs={12} md={6}>
             <Box sx={{ 
               textAlign: { xs: 'center', md: 'left' },
-              pr: { md: 1 }, 
+              pr: { md: 1 }, // Menos padding derecho para acercar al conejito
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -196,7 +196,7 @@ export default function Home({ onAddToCart, cartItems = [] }) {
               justifyContent: 'center',
               alignItems: 'center',
               height: '100%',
-              px: { md: 3 } 
+              px: { md: 3 } // Padding horizontal para centrarlo mejor en su espacio
             }}>
               <Box sx={{
                 position: 'relative',
