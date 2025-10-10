@@ -390,7 +390,7 @@ const Custom404Features = {
 
 </div>
 
-Implementamos meta tags Open Graph completos para previews perfectos en WhatsApp, Facebook, Telegram y Twitter:
+Se Implementó meta tags Open Graph completos para previews perfectos en WhatsApp, Facebook, Telegram y Twitter:
 
 ### 🎯 **Meta Tags Implementados:**
 
