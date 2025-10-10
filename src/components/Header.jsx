@@ -35,7 +35,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
   const [showLogin, setShowLogin] = useState(false);
   const location = useLocation(); // 👈 detecta ruta activa
   
-  // Calcular total de unidades en el carrito (como MercadoLibre)
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const handleDrawerToggle = () => {
@@ -76,7 +75,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
         flexDirection: "column"
       }}
     >
-      {/* Header del drawer */}
       <Box 
         sx={{ 
           background: theme.palette.mode === 'dark'
@@ -88,7 +86,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
           boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
         }}
       >
-        {/* Botón cerrar X igual que el carrito */}
         <IconButton 
           onClick={handleDrawerToggle}
           sx={{
@@ -134,7 +131,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
         />
       </Box>
 
-      {/* Lista de navegación */}
       <List sx={{ flexGrow: 1, pt: 2 }}>
         {navItems.map((item) => (
           <ListItem
@@ -197,7 +193,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
         ))}
       </List>
 
-      {/* Footer del drawer */}
       <Box 
         sx={{ 
           p: 2,
@@ -213,7 +208,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
           gap: 2
         }}
       >
-        {/* Theme Toggle en drawer móvil */}
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 1 }}>
           <Typography variant="body2" sx={{ color: "text.secondary", fontWeight: 500 }}>
             Tema:
@@ -314,10 +308,8 @@ export default function Header({ onCartClick, cartItems = [] }) {
               </Button>
             ))}
 
-            {/* Theme Toggle - Desktop */}
             <ThemeToggle color="inherit" />
 
-            {/* Indicador de usuario - Desktop */}
             {isAuthenticated() && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mx: 1 }}>
                 <PersonIcon sx={{ color: 'white', fontSize: 20 }} />
@@ -369,7 +361,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
               </IconButton>
             </Badge>
 
-            {/* Icono de usuario - Desktop (como última opción) */}
             <IconButton 
               color="inherit"
               onClick={handleUserIconClick}
@@ -396,9 +387,7 @@ export default function Header({ onCartClick, cartItems = [] }) {
             </IconButton>
           </Box>
 
-          {/* Menú móvil */}
           <Box sx={{ display: { xs: "flex", sm: "none" }, gap: 1, alignItems: 'center' }}>
-            {/* Indicador de usuario móvil con nombre si está logueado */}
             {isAuthenticated() && (
               <Typography 
                 variant="caption" 
@@ -416,7 +405,6 @@ export default function Header({ onCartClick, cartItems = [] }) {
               </Typography>
             )}
             
-            {/* Icono de usuario móvil - Login/Logout funcional */}
             <IconButton 
               color="inherit"
               onClick={handleUserIconClick}

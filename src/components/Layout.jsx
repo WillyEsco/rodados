@@ -9,18 +9,15 @@ export default function Layout() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
-  // 🔹 Cargar carrito desde localStorage
   useEffect(() => {
     const savedCart = localStorage.getItem("cartItems");
     if (savedCart) setCartItems(JSON.parse(savedCart));
   }, []);
 
-  // 🔹 Guardar carrito en localStorage
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // ✅ addToCart
   const addToCart = (product) => {
     setCartItems((prev) => {
       const itemExists = prev.find((item) => item.id === product.id);
@@ -63,18 +60,14 @@ export default function Layout() {
 
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
-      {/* 🔹 Header global */}
       <Header onCartClick={() => setCartOpen(true)} />
 
-      {/* 🔹 Aquí React Router inyecta la página correspondiente */}
       <Box component="main" flexGrow={1} p={2}>
         <Outlet context={{ addToCart }} />
       </Box>
 
-      {/* 🔹 Footer global */}
       <Footer />
 
-      {/* 🔹 Drawer del carrito, disponible en todas las páginas */}
       <Cart
         open={cartOpen}
         onClose={() => setCartOpen(false)}

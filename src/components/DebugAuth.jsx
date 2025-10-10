@@ -1,4 +1,3 @@
-// src/components/DebugAuth.jsx - Componente temporal para debug
 import React from 'react';
 import { Box, Typography, Button, Card, Chip } from '@mui/material';
 import { useAuth } from '../contexts/AuthContext';
@@ -6,7 +5,6 @@ import { useAuth } from '../contexts/AuthContext';
 const DebugAuth = () => {
   const { user, isAuthenticated, logout } = useAuth();
 
-  // Solo mostrar en desarrollo
   if (import.meta.env.MODE !== 'development') return null;
 
   const handleClearLocalStorage = () => {

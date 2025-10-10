@@ -1,4 +1,3 @@
-// src/pages/Products.jsx
 import React from "react";
 import { Container, Typography, useTheme, Box, Button, ButtonGroup } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
@@ -9,7 +8,6 @@ export default function Products({ addToCart, cartItems }) {
   const { categoria } = useParams();
   const navigate = useNavigate();
   
-  // Filtro actual (por defecto 'todo' si no hay categoría en URL)
   const currentCategory = categoria || 'todo';
   
   const handleCategoryChange = (newCategory) => {
@@ -36,7 +34,6 @@ export default function Products({ addToCart, cartItems }) {
         : 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%)'
     }}>
       <Container sx={{ pt: 4, px: { xs: 1, sm: 2 }, pb: { xs: 4, sm: 6 } }}>
-        {/* Título dinámico */}
         <Typography
           variant="h5"
           gutterBottom
@@ -50,7 +47,6 @@ export default function Products({ addToCart, cartItems }) {
           {getCategoryTitle()}
         </Typography>
 
-        {/* Botones de filtro */}
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
           <ButtonGroup 
             variant="contained" 

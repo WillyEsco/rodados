@@ -1,4 +1,3 @@
-// src/components/StyledButton.jsx
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 

@@ -53,9 +53,7 @@ export default function Footer() {
                 onMouseOver={e => (e.currentTarget.style.transform = "scale(1.2)")}
                 onMouseOut={e => (e.currentTarget.style.transform = "scale(1)")}
             />
-                {/* <Box sx={{ my: 0.2 }}>
-                    <Logo src={mascotaModal} alt="Logo" style={{ width: "5%" }} />
-                </Box> */}
+
                 <SocialIcons sx={{ mb: 0.2 }}>
                     <IconButton component="a" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" color="inherit" size="small">
                         <FacebookIcon fontSize="small" />

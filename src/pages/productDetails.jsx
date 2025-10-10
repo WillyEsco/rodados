@@ -31,7 +31,6 @@ export default function ProductDetail({
   const [product, setProduct] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
 
-  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
@@ -76,7 +75,6 @@ export default function ProductDetail({
         : 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%)'
     }}>
       <Container maxWidth="md" sx={{ pt: 4, pb: 6 }}>
-        {/* Botón cerrar adaptado al tema */}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
           <IconButton 
             onClick={() => window.history.back()}
@@ -215,7 +213,6 @@ export default function ProductDetail({
             </Typography>
 
           <Box sx={{ mt: 4 }}>
-            {/* Botón Agregar al Carrito - Responsive y consistente */}
             <StyledButton
               variant="contained"
               onClick={() => onAddToCart(product)}
@@ -248,7 +245,6 @@ export default function ProductDetail({
                     }
                   }
                 },
-                // Efecto active para móvil (touch) - forzando color original
                 "&:active": {
                   background: "linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%) !important",
                   transform: "scale(0.98)",
@@ -257,7 +253,6 @@ export default function ProductDetail({
                     animation: "cartBounce 0.4s ease-in-out"
                   }
                 },
-                // Forzar colores después del click
                 "&:focus": {
                   background: "linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%) !important"
                 },
@@ -302,7 +297,6 @@ export default function ProductDetail({
 
 
 
-        {/* Drawer del carrito */}
         <Cart
           open={cartOpen}
           onClose={() => setCartOpen(false)}

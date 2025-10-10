@@ -59,7 +59,6 @@ export default function Cart({
           position: "relative"
         }}
       >
-        {/* Header del carrito con glassmorphism */}
         <Box 
           sx={{
             background: theme.palette.mode === 'dark'
@@ -118,7 +117,6 @@ export default function Cart({
           </IconButton>
         </Box>
 
-        {/* Sección del total con glassmorphism */}
         <Paper
           elevation={0}
           sx={{
@@ -176,7 +174,6 @@ export default function Cart({
           />
         </Paper>
 
-        {/* Contenido principal del carrito */}
         <Box 
           sx={{ 
             flexGrow: 1, 
@@ -416,7 +413,6 @@ export default function Cart({
           )}
         </Box>
 
-        {/* Footer del carrito con glassmorphism */}
         {items.length > 0 && (
           <Box 
             sx={{
@@ -433,12 +429,10 @@ export default function Cart({
                 : '0 -4px 16px rgba(0, 0, 0, 0.1)',
             }}
           >
-            {/* Botón COMPRAR prominente */}
             <Button
               variant="contained"
               fullWidth
               onClick={() => {
-                // Esta función será sobrescrita por ProtectedRoute si no está autenticado
                 if (window.handlePurchase) {
                   window.handlePurchase();
                 }

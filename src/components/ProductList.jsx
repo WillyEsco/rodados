@@ -19,7 +19,6 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import spinnerImage from "../assets/spinner.png";
 
-// Estilos MD3 para Card y Button - Glassmorphism como Home
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
   background: theme.palette.mode === 'dark' 
@@ -61,7 +60,6 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
       .catch((err) => console.error("Error al cargar productos:", err));
   }, []);
 
-  // Filtrar productos según la categoría seleccionada
   useEffect(() => {
     if (categoryFilter === 'todo') {
       setFilteredProducts(products);
@@ -70,18 +68,15 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
         const productCategory = product.category?.toLowerCase();
         const filterCategory = categoryFilter.toLowerCase();
         
-        // Mapear "adultos" a "adult" para coincidir con la API
         if (filterCategory === 'adultos') {
           return productCategory === 'adult';
         }
-        // Para "kids" funciona directo
         return productCategory === filterCategory;
       });
       setFilteredProducts(filtered);
     }
   }, [products, categoryFilter]);
 
-  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;

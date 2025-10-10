@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
 import { 
   Box, 
@@ -47,7 +46,6 @@ export default function Home({ onAddToCart, cartItems = [] }) {
     }
   ];
 
-  // Cargar productos destacados de la API
   useEffect(() => {
     fetch("https://68362e14664e72d28e401640.mockapi.io/producto")
       .then((res) => res.json())
@@ -72,7 +70,6 @@ export default function Home({ onAddToCart, cartItems = [] }) {
         ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
         : 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%)'
     }}>
-      {/* Hero Section */}
       <Container maxWidth="xl" sx={{ pt: { xs: 4, md: 8 }, pb: 6 }}>
         <Grid container spacing={{ xs: 2, md: 2 }} alignItems="center" sx={{ minHeight: { md: '500px' } }}>
           <Grid item xs={12} md={6}>
@@ -226,7 +223,6 @@ export default function Home({ onAddToCart, cartItems = [] }) {
         </Grid>
       </Container>
 
-      {/* Features Section */}
       <Container maxWidth="lg" sx={{ py: 6 }}>
         <Typography 
           variant="h3" 
@@ -297,7 +293,6 @@ export default function Home({ onAddToCart, cartItems = [] }) {
         </Grid>
       </Container>
 
-      {/* Featured Products Section */}
       <Container maxWidth="lg" sx={{ py: 6 }}>
         <Typography 
           variant="h3" 
@@ -492,7 +487,6 @@ export default function Home({ onAddToCart, cartItems = [] }) {
         </Grid>
       </Container>
 
-      {/* Call to Action Section */}
       <Box sx={{
         background: theme.palette.mode === 'dark'
           ? 'linear-gradient(135deg, #6200ea, #7c4dff, #9c27b0)'
