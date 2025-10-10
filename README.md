@@ -82,42 +82,42 @@
 ### 🌅 **HOME - MODO LUMINOSO**
 *Diseño que respira elegancia y modernidad*
 
-![Home Light Mode](https://fabystudios.github.io/Rodados/assets/home-light.png)
+![Home Light Mode](https://rodados-eshop.vercel.app/assets/home-light.png)
 
 ---
 
 ### 🌙 **PRODUCTOS - MODO NOCTURNO**  
 *Glassmorphism que hipnotiza con su belleza translúcida*
 
-![Products Dark Mode](https://fabystudios.github.io/Rodados/assets/products-dark.png)
+![Products Dark Mode](https://rodados-eshop.vercel.app/assets/products-dark.png)
 
 ---
 
 ### 🛒 **CARRITO PREMIUM**
 *Experiencia de compra que convierte visitantes en clientes*
 
-![hopping Cart Premium](https://fabystudios.github.io/Rodados/assets/cart-open4.png)
+![hopping Cart Premium](https://rodados-eshop.vercel.app/assets/cart-open4.png)
 
 ---
 
 ### 📱 **NAVEGACIÓN ATÓMICA**
 *Bottom Navigation con posicionamiento matemático perfecto*
 
-![Mobile Navigation](https://fabystudios.github.io/Rodados/assets/mobile-nav.png)
+![Mobile Navigation](https://rodados-eshop.vercel.app/assets/mobile-nav.png)
 
 ---
 
 ### 👥 **PÁGINA NOSOTROS** 
 *Storytelling visual que conecta con el alma*
 
-![About Page](https://fabystudios.github.io/Rodados/assets/about-page.png)
+![About Page](https://rodados-eshop.vercel.app/assets/about-page.png)
 
 ---
 
 ### 🎨 **THEME MAGIC**
 *La magia del cambio de tema en acción*
 
-![Theme Demo](https://fabystudios.github.io/Rodados/assets/theme-demo.gif)
+![Theme Demo](https://rodados-eshop.vercel.app/assets/theme-demo.gif)
 
 
 
@@ -212,7 +212,7 @@
 
 </div>
 
-Implementamos un sistema de autenticación completo con **login social** y **persistencia inteligente**:
+Se Implementa un sistema de autenticación completo con **login social** y **persistencia inteligente**:
 
 ### ✨ **Características del Sistema:**
 
@@ -390,7 +390,7 @@ const Custom404Features = {
 
 </div>
 
-Se Implementó meta tags Open Graph completos para previews perfectos en WhatsApp, Facebook, Telegram y Twitter:
+Implementamos meta tags Open Graph completos para previews perfectos en WhatsApp, Facebook, Telegram y Twitter:
 
 ### 🎯 **Meta Tags Implementados:**
 
