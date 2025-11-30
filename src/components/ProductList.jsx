@@ -13,14 +13,11 @@ import {
   Stack,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
 import "../styles/ProductList.css";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import spinnerImage from "/assets/spinner.png";
 import errorImage from "/assets/desconectado.png";
-
-// Estilos MD3 para Card y Button - Glassmorphism como Home
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
   background: theme.palette.mode === 'dark' 
@@ -44,24 +41,20 @@ const StyledCard = styled(Card)(({ theme }) => ({
       : '0 20px 40px rgba(0, 0, 0, 0.15)',
   },
 }));
-
-
-
 export default function ProductList({ onAddToCart, cartItems = [], categoryFilter = 'todo' }) {
   const theme = useTheme();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [error, setError] = useState("");
-
   useEffect(() => {
-    fetch("https://68362e14664e72d28e401640.mockapi.io/producto")
+    fetch("https:
       .then((res) => {
         if (!res.ok) throw new Error("No se pudo cargar productos");
         return res.json();
       })
       .then((data) => {
         setProducts(data);
-        setFilteredProducts(data); // Inicialmente mostrar todos
+        setFilteredProducts(data); 
         setError("");
       })
       .catch((err) => {
@@ -71,15 +64,12 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
         console.error("Error al cargar productos:", err);      
       });
   }, []);
-
-  // Filtrar productos según la categoría seleccionada
   useEffect(() => {
     if (categoryFilter === 'todo' || categoryFilter === 'Todos') {
       setFilteredProducts(products);
     } else {
       const filterCategory = categoryFilter.trim().toLowerCase();
       const filtered = products.filter(product => {
-        // Soportar ambas propiedades: categoria y category
         const prodCat = (
           product.categoria ||
           product.category ||
@@ -87,23 +77,16 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
           product.Categoria ||
           ''
         ).trim().toLowerCase();
-
-        // Debug: ver qué categorías tiene cada producto
-        // Puedes quitar este log luego de probar
         console.log('Filtro:', filterCategory, 'Producto:', product.name, 'Categoria:', prodCat);
-
         return prodCat === filterCategory;
       });
       setFilteredProducts(filtered);
     }
   }, [products, categoryFilter]);
-
-  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
   };
-
   return (
     <Grid container spacing={3} justifyContent="center">
       {error ? (
@@ -195,7 +178,7 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
               }}>
                 <CardMedia
                   component="img"
-                  image={product.image || "https://via.placeholder.com/200"}
+                  image={product.image || "https:
                   alt={product.name}
                   sx={{
                     maxWidth: '100%',
@@ -214,7 +197,7 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: 180, // Altura fija para el contenido
+                height: 180, 
                 p: 2
               }}>
                 <Box sx={{ height: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>

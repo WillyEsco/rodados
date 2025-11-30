@@ -1,5 +1,4 @@
-// src/pages/About.jsx
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { 
   Box, 
   Container, 
@@ -25,25 +24,21 @@ import logotipoTop from "../assets/logotipo-top.png";
 import coniImage from "../assets/images/coni.png";
 import teamImage from "../assets/team.jpg";
 import officeImage from "../assets/office.jpg";
-
 export default function About() {
   const theme = useTheme();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedAlt, setSelectedAlt] = useState("");
-
   const handleImageClick = (imageSrc, imageAlt) => {
     setSelectedImage(imageSrc);
     setSelectedAlt(imageAlt);
     setModalOpen(true);
   };
-
   const handleCloseModal = () => {
     setModalOpen(false);
     setSelectedImage("");
     setSelectedAlt("");
   };
-
   return (
     <Box sx={{ 
       minHeight: '100vh',
@@ -52,10 +47,8 @@ export default function About() {
         : 'linear-gradient(135deg, #f3e5f5 0%, #e1bee7 30%, #ce93d8 70%, #ba68c8 100%)',
       py: { xs: 4, md: 8 }
     }}>
-      {/* Hero Section con Logo y Mascotas */}
       <Container maxWidth="xl" sx={{ mb: 8 }}>
         <Box sx={{ textAlign: 'center', position: 'relative' }}>
-          {/* Mascota izquierda flotante */}
           <Box sx={{
             position: 'absolute',
             left: { xs: '5%', md: '10%' },
@@ -75,8 +68,6 @@ export default function About() {
               }}
             />
           </Box>
-
-          {/* Mascota derecha flotante */}
           <Box sx={{
             position: 'absolute',
             right: { xs: '5%', md: '10%' },
@@ -96,8 +87,6 @@ export default function About() {
               }}
             />
           </Box>
-
-          {/* Logo Principal */}
           <Box sx={{ mb: 4, position: 'relative', zIndex: 3 }}>
             <img
               src={logotipoTop}
@@ -111,8 +100,6 @@ export default function About() {
               }}
             />
           </Box>
-
-          {/* Badges decorativos */}
           <Stack 
             direction={{ xs: 'column', sm: 'row' }} 
             spacing={2} 
@@ -152,8 +139,6 @@ export default function About() {
               }}
             />
           </Stack>
-
-          {/* Descripción mejorada */}
           <Typography
             variant="h5"
             align="center"
@@ -188,8 +173,6 @@ export default function About() {
           </Typography>
         </Box>
       </Container>
-
-      {/* Sección de Cards Mejoradas */}
       <Container maxWidth="lg" sx={{ mb: 6 }}>
         <Typography
           variant="h3"
@@ -208,7 +191,6 @@ export default function About() {
         >
           Conoce Nuestra Historia
         </Typography>
-
         <Grid container spacing={6} justifyContent="center">
           <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center' }}>
             <Card sx={{
@@ -235,7 +217,6 @@ export default function About() {
                   : '0 25px 50px rgba(138, 43, 226, 0.2)'
               }
             }}>
-              {/* Badge decorativo */}
               <Box sx={{
                 position: 'absolute',
                 top: 15,
@@ -252,7 +233,6 @@ export default function About() {
                   }}
                 />
               </Box>
-              
               <CardMedia
                 component="img"
                 height="300"
@@ -269,7 +249,6 @@ export default function About() {
                 }}
                 onClick={() => handleImageClick(teamImage, "Nuestro equipo")}
               />
-              
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" gutterBottom sx={{ 
                   fontWeight: 'bold', 
@@ -291,7 +270,6 @@ export default function About() {
               </CardContent>
             </Card>
           </Grid>
-
           <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center' }}>
             <Card sx={{
               maxWidth: 450,
@@ -317,7 +295,6 @@ export default function About() {
                   : '0 25px 50px rgba(138, 43, 226, 0.2)'
               }
             }}>
-              {/* Badge decorativo */}
               <Box sx={{
                 position: 'absolute',
                 top: 15,
@@ -334,7 +311,6 @@ export default function About() {
                   }}
                 />
               </Box>
-              
               <CardMedia
                 component="img"
                 height="300"
@@ -351,7 +327,6 @@ export default function About() {
                 }}
                 onClick={() => handleImageClick(officeImage, "Nuestra tienda")}
               />
-              
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" gutterBottom sx={{ 
                   fontWeight: 'bold', 
@@ -374,8 +349,6 @@ export default function About() {
             </Card>
           </Grid>
         </Grid>
-
-        {/* Mascota central móvil */}
         <Box sx={{
           textAlign: 'center',
           mt: 6,
@@ -393,8 +366,6 @@ export default function About() {
           />
         </Box>
       </Container>
-
-      {/* Modal para mostrar imagen en pantalla completa */}
       <Modal
         open={modalOpen}
         onClose={handleCloseModal}
@@ -415,7 +386,7 @@ export default function About() {
             justifyContent: "center",
             outline: "none"
           }}
-          onClick={handleCloseModal} // 🔹 Cerrar al hacer clic en el fondo
+          onClick={handleCloseModal} 
         >
           <IconButton
             onClick={handleCloseModal}
@@ -423,15 +394,15 @@ export default function About() {
               position: "absolute",
               top: 20,
               right: 20,
-              bgcolor: "#ff1744", // 🔹 Fondo rojo para mejor visibilidad
+              bgcolor: "#ff1744", 
               color: "white",
-              border: "2px solid white", // 🔹 Borde blanco para contraste
+              border: "2px solid white", 
               "&:hover": {
-                bgcolor: "#d50000", // 🔹 Rojo más oscuro en hover
-                transform: "scale(1.1)" // 🔹 Efecto de agrandamiento
+                bgcolor: "#d50000", 
+                transform: "scale(1.1)" 
               },
               zIndex: 1,
-              transition: "all 0.3s ease" // 🔹 Transición suave
+              transition: "all 0.3s ease" 
             }}
           >
             <CloseIcon />
@@ -449,23 +420,19 @@ export default function About() {
               borderRadius: "8px",
               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)"
             }}
-            onClick={(e) => e.stopPropagation()} // 🔹 Evitar cerrar al hacer clic en la imagen
+            onClick={(e) => e.stopPropagation()} 
           />
         </Box>
       </Modal>
-
-      {/* Estilos CSS para las animaciones */}
       <style jsx global>{`
         @keyframes floatLeft {
           0%, 100% { transform: translateY(0px) rotate(-10deg); }
           50% { transform: translateY(-20px) rotate(-5deg); }
         }
-        
         @keyframes floatRight {
           0%, 100% { transform: translateY(0px) rotate(15deg); }
           50% { transform: translateY(-15px) rotate(10deg); }
         }
-        
         @keyframes logoGlow {
           0%, 100% { 
             filter: drop-shadow(0 10px 25px rgba(0,0,0,0.15));
@@ -476,12 +443,10 @@ export default function About() {
             transform: scale(1.02);
           }
         }
-        
         @keyframes pulse {
           0%, 100% { opacity: 1; transform: scale(1); }
           50% { opacity: 0.8; transform: scale(1.05); }
         }
-        
         @keyframes bounce {
           0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
           40% { transform: translateY(-10px); }

@@ -28,7 +28,6 @@ import logoBackup from "../assets/logo-backup.png";
 import textoMarca from "../assets/texto-marca.png";
 import { useCarrito } from "../contexts/CarritoContext";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-
 export default function Header({ onCartClick }) {
   const theme = useTheme();
   const { user, isAuthenticated, logout, isAdmin } = useAuth();
@@ -36,31 +35,25 @@ export default function Header({ onCartClick }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
   const handleUserIconClick = () => {
     if (isAuthenticated()) {
       logout();
       navigate("/");
     } else {
-      navigate("/login"); // ← Redirige a la página de login
+      navigate("/login"); 
     }
   };
-
   const navItems = [
     { text: "Inicio", path: "/" },
     { text: "Productos", path: "/productos" },
     { text: "Nosotros", path: "/nosotros" },
   ];
-
-  // Agregar Admin al menú si es administrador
   const menuItems = isAdmin()
     ? [...navItems, { text: "Admin", path: "/admin", icon: <AdminPanelSettingsIcon /> }]
     : navItems;
-
   const drawer = (
     <Box
       sx={{
@@ -74,7 +67,6 @@ export default function Header({ onCartClick }) {
         flexDirection: "column",
       }}
     >
-      {/* Header del drawer */}
       <Box
         sx={{
           background:
@@ -87,7 +79,6 @@ export default function Header({ onCartClick }) {
           boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
         }}
       >
-        {/* Botón cerrar X igual que el carrito */}
         <IconButton
           onClick={handleDrawerToggle}
           sx={{
@@ -108,7 +99,6 @@ export default function Header({ onCartClick }) {
         >
           <CloseIcon sx={{ fontSize: 20 }} />
         </IconButton>
-
         <Box
           component="img"
           src={logoPpal}
@@ -134,8 +124,6 @@ export default function Header({ onCartClick }) {
           }}
         />
       </Box>
-
-      {/* Theme Toggle - Movido ARRIBA de la lista */}
       <Box sx={{
         display: "flex",
         justifyContent: "center",
@@ -151,8 +139,6 @@ export default function Header({ onCartClick }) {
         </Typography>
         <ThemeToggle size="medium" />
       </Box>
-
-      {/* Lista de navegación */}
       <List sx={{ flexGrow: 1, pt: 2 }}>
         {menuItems.map((item) => (
           <ListItem
@@ -238,8 +224,6 @@ export default function Header({ onCartClick }) {
           </ListItem>
         ))}
       </List>
-
-      {/* Footer del drawer - SIN theme toggle */}
       <Box
         sx={{
           p: 2,
@@ -264,14 +248,13 @@ export default function Header({ onCartClick }) {
       </Box>
     </Box>
   );
-
   return (
     <>
       <AppBar
         position="sticky"
-        component="nav" // ← Semántica
-        role="navigation" // ← ARIA
-        aria-label="Navegación principal" // ← ARIA
+        component="nav" 
+        role="navigation" 
+        aria-label="Navegación principal" 
         sx={{
           background:
             theme.palette.mode === "dark"
@@ -290,11 +273,10 @@ export default function Header({ onCartClick }) {
             alignItems: "center",
           }}
         >
-          {/* Logo izquierda */}
           <Box
             component={Link}
             to="/"
-            aria-label="Ir a página de inicio" // ← ARIA
+            aria-label="Ir a página de inicio" 
             sx={{
               display: "flex",
               alignItems: "center",
@@ -338,8 +320,6 @@ export default function Header({ onCartClick }) {
               sx={{ height: { xs: 30, sm: 50 } }}
             />
           </Box>
-
-          {/* Menú escritorio derecha */}
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
             {navItems.map((item) => (
               <Button
@@ -358,11 +338,7 @@ export default function Header({ onCartClick }) {
                 {item.text === "Inicio" ? <HomeIcon sx={{ fontSize: 25 }} /> : item.text}
               </Button>
             ))}
-
-            {/* Theme Toggle - Desktop */}
             <ThemeToggle color="inherit" />
-
-            {/* Indicador de usuario - Desktop */}
             {isAuthenticated() && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mx: 1 }}>
                 <PersonIcon sx={{ color: 'white', fontSize: 20 }} />
@@ -371,8 +347,6 @@ export default function Header({ onCartClick }) {
                 </Typography>
               </Box>
             )}
-
-            {/* Botón Admin - Solo para administradores */}
             {isAdmin() && (
               <Button
                 component={Link}
@@ -393,8 +367,6 @@ export default function Header({ onCartClick }) {
                 Admin
               </Button>
             )}
-
-            {/* Carrito - Desktop */}
             <Badge
               badgeContent={getCartCount()}
               sx={{
@@ -420,25 +392,21 @@ export default function Header({ onCartClick }) {
               <IconButton 
                 color="inherit" 
                 onClick={onCartClick}
-                aria-label={`Abrir carrito con ${getCartCount()} productos`} // ← ARIA
+                aria-label={`Abrir carrito con ${getCartCount()} productos`} 
               >
                 <ShoppingCartIcon />
               </IconButton>
             </Badge>
-
-            {/* Botón Logout - Desktop */}
             {isAuthenticated() && (
               <IconButton
                 color="inherit"
                 onClick={() => { logout(); navigate("/"); }}
-                aria-label={`Cerrar sesión de ${user?.username}`} // ← ARIA
+                aria-label={`Cerrar sesión de ${user?.username}`} 
                 title="Cerrar sesión"
               >
                 <LogoutIcon />
               </IconButton>
             )}
-
-            {/* Botón Login - Solo si NO está autenticado */}
             {!isAuthenticated() && (
               <IconButton
                 color="inherit"
@@ -455,10 +423,7 @@ export default function Header({ onCartClick }) {
               </IconButton>
             )}
           </Box>
-
-          {/* Menú móvil */}
           <Box sx={{ display: { xs: "flex", sm: "none" }, gap: 1, alignItems: 'center' }}>
-            {/* Indicador de usuario móvil - Solo nombre si está logueado */}
             {isAuthenticated() && (
               <Typography 
                 variant="caption" 
@@ -475,15 +440,12 @@ export default function Header({ onCartClick }) {
                 {user?.username?.split(' ')[0]}
               </Typography>
             )}
-            
-            {/* Menú hamburguesa */}
             <IconButton color="inherit" onClick={handleDrawerToggle}>
               <MenuIcon />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
-
       <Drawer
         anchor="right"
         open={mobileOpen}

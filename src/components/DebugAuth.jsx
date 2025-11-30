@@ -1,19 +1,13 @@
-// src/components/DebugAuth.jsx - Componente temporal para debug
 import React from 'react';
 import { Box, Typography, Button, Card, Chip } from '@mui/material';
 import { useAuth } from '../contexts/AuthContext';
-
 const DebugAuth = () => {
   const { user, isAuthenticated, logout } = useAuth();
-
-  // Solo mostrar en desarrollo
   if (import.meta.env.MODE !== 'development') return null;
-
   const handleClearLocalStorage = () => {
     localStorage.clear();
     window.location.reload();
   };
-
   const handleClearProviderUsers = () => {
     const keysToRemove = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -25,7 +19,6 @@ const DebugAuth = () => {
     keysToRemove.forEach(key => localStorage.removeItem(key));
     alert(`Eliminados ${keysToRemove.length} usuarios de providers`);
   };
-
   return (
     <Card 
       sx={{
@@ -43,7 +36,6 @@ const DebugAuth = () => {
       <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem' }}>
         🔍 Debug Auth
       </Typography>
-      
       <Box sx={{ mb: 1 }}>
         <Chip 
           label={isAuthenticated() ? "Autenticado" : "No autenticado"} 
@@ -52,7 +44,6 @@ const DebugAuth = () => {
           sx={{ mb: 1 }}
         />
       </Box>
-
       {user && (
         <Box sx={{ mb: 2 }}>
           <Typography variant="body2">👤 Usuario: {user.username}</Typography>
@@ -61,7 +52,6 @@ const DebugAuth = () => {
           <Typography variant="body2">🕐 Login: {new Date(user.loginTime).toLocaleTimeString()}</Typography>
         </Box>
       )}
-
       <Box sx={{ display: 'flex', gap: 1, flexDirection: 'column' }}>
         {isAuthenticated() && (
           <Button 
@@ -89,12 +79,10 @@ const DebugAuth = () => {
           Clear All Storage
         </Button>
       </Box>
-
       <Typography variant="caption" sx={{ mt: 1, display: 'block' }}>
         LocalStorage: {localStorage.getItem('authUser') ? '✅' : '❌'}
       </Typography>
     </Card>
   );
 };
-
 export default DebugAuth;

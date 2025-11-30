@@ -18,7 +18,6 @@ import comprasImage from "../assets/compras.png";
 import carritoImage from "../assets/carrito.png";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
-
 export default function Cart({
   open,
   onClose,
@@ -32,7 +31,6 @@ export default function Cart({
   const total = items
     .reduce((acc, item) => acc + item.price * item.quantity, 0)
     .toFixed(2);
-
   return (
     <Drawer 
       anchor="right" 
@@ -59,7 +57,6 @@ export default function Cart({
           position: "relative"
         }}
       >
-        {/* Header del carrito con glassmorphism */}
         <Box 
           sx={{
             background: theme.palette.mode === 'dark'
@@ -117,8 +114,6 @@ export default function Cart({
             <CloseIcon />
           </IconButton>
         </Box>
-
-        {/* Sección del total con glassmorphism */}
         <Paper
           elevation={0}
           sx={{
@@ -175,8 +170,6 @@ export default function Cart({
             }}
           />
         </Paper>
-
-        {/* Contenido principal del carrito */}
         <Box 
           sx={{ 
             flexGrow: 1, 
@@ -315,7 +308,6 @@ export default function Cart({
                         <DeleteIcon fontSize="medium" />
                       </IconButton>
                     </Box>
-                    
                     <Box 
                       sx={{
                         display: "flex",
@@ -360,7 +352,6 @@ export default function Cart({
                       >
                         <RemoveIcon fontSize="small" />
                       </IconButton>
-                      
                       <Typography
                         sx={{
                           minWidth: "50px",
@@ -384,7 +375,6 @@ export default function Cart({
                       >
                         {item.quantity}
                       </Typography>
-                      
                       <IconButton 
                         size="small" 
                         onClick={() => increaseQty(item.id)}
@@ -415,9 +405,7 @@ export default function Cart({
             </List>
           )}
         </Box>
-
-        {/* Footer del carrito con glassmorphism */}
-        {items.length > 0 && (
+        {cartItems.length > 0 && (
           <Box 
             sx={{
               p: 3,
@@ -433,12 +421,10 @@ export default function Cart({
                 : '0 -4px 16px rgba(0, 0, 0, 0.1)',
             }}
           >
-            {/* Botón COMPRAR prominente */}
             <Button
               variant="contained"
               fullWidth
               onClick={() => {
-                // Esta función será sobrescrita por ProtectedRoute si no está autenticado
                 if (window.handlePurchase) {
                   window.handlePurchase();
                 }
@@ -481,7 +467,6 @@ export default function Cart({
             >
               🛒 COMPRAR AHORA - ${total}
             </Button>
-
             <Button
               variant="outlined"
               fullWidth

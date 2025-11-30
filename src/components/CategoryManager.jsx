@@ -16,20 +16,16 @@ import AddIcon from '@mui/icons-material/Add';
 import RestoreIcon from '@mui/icons-material/Restore';
 import CloseIcon from '@mui/icons-material/Close';
 import { categoryManager } from '../utils/categoryManager';
-
 export default function CategoryManager({ onClose }) {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState('');
   const theme = useTheme();
-
   useEffect(() => {
     loadCategories();
   }, []);
-
   const loadCategories = () => {
     setCategories(categoryManager.getCategories());
   };
-
   const handleAdd = () => {
     if (newCategory.trim()) {
       const updated = categoryManager.addCategory(newCategory);
@@ -37,21 +33,18 @@ export default function CategoryManager({ onClose }) {
       setNewCategory('');
     }
   };
-
   const handleDelete = (category) => {
     if (window.confirm(`¿Eliminar categoría "${category}"?`)) {
       const updated = categoryManager.removeCategory(category);
       setCategories(updated);
     }
   };
-
   const handleReset = () => {
     if (window.confirm('¿Restaurar categorías por defecto?')) {
       const updated = categoryManager.resetCategories();
       setCategories(updated);
     }
   };
-
   return (
     <Box sx={{ p: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
@@ -62,8 +55,6 @@ export default function CategoryManager({ onClose }) {
           <CloseIcon />
         </IconButton>
       </Box>
-
-      {/* Agregar nueva categoría */}
       <Box sx={{ display: 'flex', gap: 1, mb: 3 }}>
         <TextField
           fullWidth
@@ -84,10 +75,7 @@ export default function CategoryManager({ onClose }) {
           Agregar
         </Button>
       </Box>
-
       <Divider sx={{ mb: 2 }} />
-
-      {/* Lista de categorías */}
       <Typography variant="subtitle2" sx={{ mb: 1, color: 'text.secondary' }}>
         Categorías actuales ({categories.length}):
       </Typography>
@@ -112,8 +100,6 @@ export default function CategoryManager({ onClose }) {
           </ListItem>
         ))}
       </List>
-
-      {/* Botón restaurar */}
       <Button
         fullWidth
         variant="outlined"

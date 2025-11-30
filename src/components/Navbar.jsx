@@ -18,7 +18,6 @@ import LockIcon from '@mui/icons-material/Lock';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoginIcon from '@mui/icons-material/Login';
-
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -28,18 +27,14 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-
   const from = location.state?.from?.pathname || '/';
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-
     if (!username || !password) {
       setError('Por favor, complete todos los campos');
       return;
     }
-
     const success = login(username, password);
     if (success) {
       navigate(from, { replace: true });
@@ -47,7 +42,6 @@ export default function Login() {
       setError('Credenciales inválidas');
     }
   };
-
   return (
     <Box
       sx={{
@@ -89,13 +83,11 @@ export default function Login() {
           >
             Iniciar Sesión
           </Typography>
-
           {error && (
             <Alert severity="error" sx={{ mb: 3 }}>
               {error}
             </Alert>
           )}
-
           <Box component="form" onSubmit={handleSubmit}>
             <TextField
               fullWidth
@@ -125,7 +117,6 @@ export default function Login() {
                 },
               }}
             />
-
             <TextField
               fullWidth
               label="Contraseña"
@@ -166,7 +157,6 @@ export default function Login() {
                 },
               }}
             />
-
             <StyledButton
               type="submit"
               fullWidth
@@ -188,7 +178,6 @@ export default function Login() {
             >
               Ingresar
             </StyledButton>
-
             <Typography
               align="center"
               sx={{

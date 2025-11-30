@@ -1,9 +1,6 @@
-// src/pages/Products.jsx
 import React, { useState, useEffect } from "react";
-import { Helmet } from 'react-helmet-async'; // ← Agregar
+import { Helmet } from 'react-helmet-async'; 
 import { useParams, useNavigate } from "react-router-dom";
-// ← Comenta temporalmente esta línea si no tienes la imagen
-// import tristeImg from "../assets/triston.png";
 import {
   Box,
   Container,
@@ -22,29 +19,22 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import ProductCard from "../components/ProductCard";
 import { useCarrito } from "../contexts/CarritoContext";
 import { categoryManager } from "../utils/categoryManager";
-
-const API_URL = "https://68362e14664e72d28e401640.mockapi.io/producto";
-
+const API_URL = "https:
 export default function Products() {
   const { categoria } = useParams();
   const theme = useTheme();
   const { addToCart, cartItems } = useCarrito();
   const navigate = useNavigate();
-  
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // ← Agregar estado de error
+  const [error, setError] = useState(null); 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(categoria || "Todos");
-
-  // Obtener categorías dinámicamente
   const categorias = ['Todos', ...categoryManager.getCategories()];
-
-  // Cargar productos
   useEffect(() => {
     setLoading(true);
-    setError(null); // Limpiar error previo
+    setError(null); 
     fetch(API_URL)
       .then((res) => {
         if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
@@ -60,12 +50,8 @@ export default function Products() {
         setLoading(false);
       });
   }, []);
-
-  // Filtrar productos por categoría y búsqueda
   useEffect(() => {
     let result = products;
-
-    // Filtrar por categoría
     if (selectedCategory !== "Todos") {
       result = result.filter((product) => {
         const prodCat = (
@@ -74,29 +60,22 @@ export default function Products() {
           ""
         ).trim().toLowerCase();
         const filterCat = selectedCategory.trim().toLowerCase();
-        
         return prodCat === filterCat;
       });
     }
-
-    // Filtrar por búsqueda
     if (searchTerm.trim() !== "") {
       result = result.filter((product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (product.descripcion && product.descripcion.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
-
     setFilteredProducts(result);
   }, [products, selectedCategory, searchTerm]);
-
-  // Actualizar categoría desde URL
   useEffect(() => {
     if (categoria) {
       setSelectedCategory(categoria);
     }
   }, [categoria]);
-
   const handleCategoryChange = (newCategory) => {
     if (newCategory === 'Todos') {
       navigate('/productos');
@@ -104,7 +83,6 @@ export default function Products() {
       navigate(`/productos/${newCategory}`);
     }
   };
-
   const getCategoryTitle = () => {
     switch (selectedCategory) {
       case 'kids': return 'Productos para Niños';
@@ -112,7 +90,6 @@ export default function Products() {
       default: return 'Todos los Productos';
     }
   };
-
   return (
     <>
       <Helmet>
@@ -129,9 +106,8 @@ export default function Products() {
         <meta property="og:title" content={`${selectedCategory} - Rodados eShop`} />
         <meta property="og:description" content="Tu tienda online de rodados y accesorios" />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href={`https://tu-dominio.com/productos${categoria ? `/${categoria}` : ''}`} />
+        <link rel="canonical" href={`https:
       </Helmet>
-
       <Box sx={{ 
         minHeight: '100vh',
         background: theme.palette.mode === 'dark' 
@@ -140,7 +116,6 @@ export default function Products() {
         py: 4
       }}>
         <Container maxWidth="xl">
-          {/* Header con título */}
           <Typography
             variant="h3"
             sx={{
@@ -155,7 +130,6 @@ export default function Products() {
           >
             Nuestros Productos
           </Typography>
-          
           <Typography
             variant="subtitle1"
             sx={{
@@ -168,8 +142,6 @@ export default function Products() {
               ? `Mostrando: ${selectedCategory}` 
               : "Todos los productos disponibles"}
           </Typography>
-
-          {/* Barra de búsqueda */}
           <Paper
             elevation={3}
             sx={{
@@ -222,8 +194,6 @@ export default function Products() {
               }}
             />
           </Paper>
-
-          {/* Filtros por categoría */}
           <Paper
             elevation={3}
             sx={{
@@ -256,7 +226,6 @@ export default function Products() {
                 Filtrar por categoría:
               </Typography>
             </Box>
-
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5 }}>
               {categorias.map((cat) => (
                 <Chip
@@ -303,8 +272,6 @@ export default function Products() {
               ))}
             </Box>
           </Paper>
-
-          {/* Mostrar error si existe */}
           {error && (
             <Paper
               elevation={3}
@@ -349,8 +316,6 @@ export default function Products() {
               </Button>
             </Paper>
           )}
-
-          {/* Contador de resultados - solo si no hay error */}
           {!error && (
             <Typography
               variant="body1"
@@ -366,8 +331,6 @@ export default function Products() {
                 : `${filteredProducts.length} producto${filteredProducts.length !== 1 ? "s" : ""} encontrado${filteredProducts.length !== 1 ? "s" : ""}`}
             </Typography>
           )}
-
-          {/* Grid de productos - solo si no hay error */}
           {!error && (
             <Fade in={!loading} timeout={600}>
               <Box
@@ -393,8 +356,6 @@ export default function Products() {
               </Box>
             </Fade>
           )}
-
-          {/* Mensaje cuando no hay resultados - solo si no hay error */}
           {!loading && !error && filteredProducts.length === 0 && (
             <Box
               sx={{
@@ -402,13 +363,6 @@ export default function Products() {
                 py: 4
               }}
             >
-              {/* Comentar temporalmente la imagen */}
-              {/* <Box
-                component="img"
-                src={tristeImg}
-                alt="No results"
-                sx={{ mb: 2, width: 120, height: 130, objectFit: "contain", mx: "auto" }}
-              /> */}
               <Typography
                 variant="h5"
                 sx={{

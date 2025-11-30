@@ -1,7 +1,5 @@
-// src/components/StyledButton.jsx
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
 const StyledButton = styled(Button)(({ theme }) => ({
   borderRadius: "999px",
   width: "100%",
@@ -16,5 +14,4 @@ const StyledButton = styled(Button)(({ theme }) => ({
     background: "linear-gradient(90deg, #7F67BE 0%, #B69DF8 100%)",
   },
 }));
-
 export default StyledButton;

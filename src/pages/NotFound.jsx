@@ -4,11 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
 const NotFound = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-
   return (
     <Box sx={{ 
       minHeight: '80vh',
@@ -49,7 +47,6 @@ const NotFound = () => {
           >
             404
           </Typography>
-          
           <Typography 
             variant="h5" 
             component="h2"
@@ -61,7 +58,6 @@ const NotFound = () => {
           >
             ¡Oops! Página no encontrada
           </Typography>
-          
           <Typography 
             variant="body1"
             sx={{
@@ -73,7 +69,6 @@ const NotFound = () => {
             La página que buscas no existe o ha sido movida. 
             Te invitamos a explorar nuestros productos.
           </Typography>
-
           <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center' }}>
             <Button
               component={Link}
@@ -98,7 +93,6 @@ const NotFound = () => {
             >
               Ir al Inicio
             </Button>
-
             <Button
               component={Link}
               to="/productos"
@@ -127,7 +121,6 @@ const NotFound = () => {
               Ver Productos
             </Button>
           </Box>
-
           <Button
             onClick={() => navigate(-1)}
             sx={{
@@ -147,5 +140,4 @@ const NotFound = () => {
     </Box>
   );
 };
-
 export default NotFound;

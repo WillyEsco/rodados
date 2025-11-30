@@ -1,4 +1,3 @@
-// src/components/BottomNavigation.jsx
 import React from "react";
 import { 
   Box,
@@ -19,26 +18,21 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import { useCarrito } from "../contexts/CarritoContext";
 import { useAuth } from "../contexts/AuthContext";
-
 export default function BottomNavigation({ onCartClick }) {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
   const { getCartCount } = useCarrito();
   const { isAdmin, isAuthenticated, logout } = useAuth();
-
-  // Debug: Log para verificar que el componente renderiza
   console.log('✅ BottomNavigation rendering:', {
     isAdmin: isAdmin(),
     cartCount: getCartCount(),
     pathname: location.pathname
   });
-
   const isActive = (path) => {
     if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
-
   const NavButton = ({ icon, label, path, onClick }) => {
     const active = isActive(path);
     return (
@@ -83,8 +77,6 @@ export default function BottomNavigation({ onCartClick }) {
       </Box>
     );
   };
-
-  // Versión ADMIN (con logout en lugar de nosotros)
   if (isAdmin()) {
     return (
       <Paper
@@ -128,8 +120,6 @@ export default function BottomNavigation({ onCartClick }) {
       </Paper>
     );
   }
-
-  // Versión USUARIO (con carrito central destacado tipo Atom)
   return (
     <Paper
       sx={{
@@ -154,8 +144,6 @@ export default function BottomNavigation({ onCartClick }) {
     >
       <NavButton icon={<HomeIcon />} label="Inicio" path="/" />
       <NavButton icon={<CategoryIcon />} label="Productos" path="/productos" />
-      
-      {/* Carrito Central Destacado tipo Atom */}
       <Box
         sx={{
           position: 'relative',
@@ -227,10 +215,7 @@ export default function BottomNavigation({ onCartClick }) {
           Carrito
         </Typography>
       </Box>
-
       <NavButton icon={<InfoIcon />} label="Nosotros" path="/nosotros" />
-      
-      {/* Botón Login/Logout */}
       {isAuthenticated() ? (
         <NavButton 
           icon={<LogoutIcon sx={{ color: '#ff6b6b' }} />} 

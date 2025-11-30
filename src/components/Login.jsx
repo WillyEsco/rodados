@@ -1,4 +1,3 @@
-// src/components/Login.jsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -24,56 +23,44 @@ import {
   Email as EmailIcon
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
-
 const Login = ({ onClose, onLoginSuccess }) => {
   const theme = useTheme();
   const { login, loginWithProvider } = useAuth();
-  
   const [formData, setFormData] = useState({
     username: '',
     email: ''
   });
-  
   const [loading, setLoading] = useState(false);
   const [socialLoading, setSocialLoading] = useState(null);
   const [error, setError] = useState('');
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-    setError(''); // Limpiar error al escribir
+    setError(''); 
   };
-
   const handleManualLogin = async (e) => {
     e.preventDefault();
-    
     if (!formData.username.trim() || !formData.email.trim()) {
       setError('Por favor completa todos los campos');
       return;
     }
-
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       setError('Por favor ingresa un email válido');
       return;
     }
-
     setLoading(true);
     setError('');
-
     try {
-      // Simular delay de login
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
       const userData = {
         username: formData.username,
         email: formData.email,
         provider: 'manual',
-        avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.username)}&background=4CAF50&color=fff`
+        avatar: `https:
       };
-
       login(userData);
       onLoginSuccess && onLoginSuccess();
     } catch {
@@ -82,11 +69,9 @@ const Login = ({ onClose, onLoginSuccess }) => {
       setLoading(false);
     }
   };
-
   const handleSocialLogin = async (provider) => {
     setSocialLoading(provider);
     setError('');
-
     try {
       await loginWithProvider(provider);
       onLoginSuccess && onLoginSuccess();
@@ -96,14 +81,12 @@ const Login = ({ onClose, onLoginSuccess }) => {
       setSocialLoading(null);
     }
   };
-
   const socialProviders = [
     { name: 'Google', icon: GoogleIcon, color: '#DB4437' },
     { name: 'Facebook', icon: FacebookIcon, color: '#4267B2' },
     { name: 'Instagram', icon: InstagramIcon, color: '#E4405F' },
     { name: 'Twitter', icon: TwitterIcon, color: '#1DA1F2' }
   ];
-
   return (
     <Box
       sx={{
@@ -140,7 +123,6 @@ const Login = ({ onClose, onLoginSuccess }) => {
         }}
       >
         <CardContent sx={{ p: { xs: 2, sm: 4 } }}>
-          {/* Header */}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
             <Typography 
               variant="h4" 
@@ -155,7 +137,6 @@ const Login = ({ onClose, onLoginSuccess }) => {
             >
               Iniciar Sesión
             </Typography>
-            
             <IconButton 
               onClick={onClose}
               sx={{
@@ -172,14 +153,11 @@ const Login = ({ onClose, onLoginSuccess }) => {
               <CloseIcon />
             </IconButton>
           </Box>
-
           {error && (
             <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>
               {error}
             </Alert>
           )}
-
-          {/* Login Form */}
           <Box component="form" onSubmit={handleManualLogin} sx={{ mb: 3 }}>
             <TextField
               fullWidth
@@ -198,7 +176,6 @@ const Login = ({ onClose, onLoginSuccess }) => {
                 startAdornment: <PersonIcon sx={{ mr: 1, color: 'action.active' }} />
               }}
             />
-            
             <TextField
               fullWidth
               name="email"
@@ -217,7 +194,6 @@ const Login = ({ onClose, onLoginSuccess }) => {
                 startAdornment: <EmailIcon sx={{ mr: 1, color: 'action.active' }} />
               }}
             />
-
             <Button
               type="submit"
               fullWidth
@@ -248,20 +224,15 @@ const Login = ({ onClose, onLoginSuccess }) => {
               )}
             </Button>
           </Box>
-
-          {/* Divider */}
           <Divider sx={{ my: 3 }}>
             <Typography variant="body2" sx={{ color: 'text.secondary', px: 2 }}>
               O continuar con
             </Typography>
           </Divider>
-
-          {/* Social Login Buttons */}
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
             {socialProviders.map((provider) => {
               const Icon = provider.icon;
               const isLoading = socialLoading === provider.name;
-              
               return (
                 <Button
                   key={provider.name}
@@ -298,8 +269,6 @@ const Login = ({ onClose, onLoginSuccess }) => {
               );
             })}
           </Box>
-
-          {/* Footer */}
           <Typography 
             variant="body2" 
             sx={{ 
@@ -316,5 +285,4 @@ const Login = ({ onClose, onLoginSuccess }) => {
     </Box>
   );
 };
-
 export default Login;

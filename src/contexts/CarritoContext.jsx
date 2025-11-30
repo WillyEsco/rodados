@@ -1,7 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
 const CarritoContext = createContext();
-
 export const useCarrito = () => {
   const context = useContext(CarritoContext);
   if (!context) {
@@ -9,11 +7,8 @@ export const useCarrito = () => {
   }
   return context;
 };
-
 export const CarritoProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-
-  // Cargar carrito desde localStorage al iniciar
   useEffect(() => {
     const savedCart = localStorage.getItem("cartItems");
     if (savedCart) {
@@ -25,14 +20,11 @@ export const CarritoProvider = ({ children }) => {
       }
     }
   }, []);
-
-  // Guardar carrito en localStorage cuando cambie
   useEffect(() => {
     if (cartItems.length >= 0) {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
   }, [cartItems]);
-
   const addToCart = (product) => {
     setCartItems(prev => {
       const existingItem = prev.find(item => item.id === product.id);
@@ -46,7 +38,6 @@ export const CarritoProvider = ({ children }) => {
       return [...prev, { ...product, quantity: 1 }];
     });
   };
-
   const increaseQty = (productId) => {
     setCartItems(prev =>
       prev.map(item =>
@@ -56,7 +47,6 @@ export const CarritoProvider = ({ children }) => {
       )
     );
   };
-
   const decreaseQty = (productId) => {
     setCartItems(prev =>
       prev
@@ -68,15 +58,12 @@ export const CarritoProvider = ({ children }) => {
         .filter(item => item.quantity > 0)
     );
   };
-
   const removeItem = (productId) => {
     setCartItems(prev => prev.filter(item => item.id !== productId));
   };
-
   const clearCart = () => {
     setCartItems([]);
   };
-
   const getCartTotal = () => {
     return cartItems.reduce((total, item) => {
       const price = parseFloat(item.price) || 0;
@@ -84,11 +71,9 @@ export const CarritoProvider = ({ children }) => {
       return total + (price * quantity);
     }, 0);
   };
-
   const getCartCount = () => {
     return cartItems.reduce((count, item) => count + (parseInt(item.quantity) || 0), 0);
   };
-
   return (
     <CarritoContext.Provider
       value={{

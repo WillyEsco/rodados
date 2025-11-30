@@ -14,7 +14,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ImageIcon from '@mui/icons-material/Image';
 import { categoryManager } from '../utils/categoryManager';
-
 export default function ProductForm({ product, onSubmit, onCancel }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -24,10 +23,7 @@ export default function ProductForm({ product, onSubmit, onCancel }) {
     categoria: ''
   });
   const theme = useTheme();
-
-  // Obtener categorías dinámicamente
   const categorias = categoryManager.getCategories();
-
   useEffect(() => {
     if (product) {
       setFormData({
@@ -39,19 +35,16 @@ export default function ProductForm({ product, onSubmit, onCancel }) {
       });
     }
   }, [product]);
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
   };
-
   return (
     <Box sx={{ p: 3 }}>
       <Typography
@@ -64,7 +57,6 @@ export default function ProductForm({ product, onSubmit, onCancel }) {
       >
         {product ? 'Editar Producto' : 'Nuevo Producto'}
       </Typography>
-
       <Box component="form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -91,7 +83,6 @@ export default function ProductForm({ product, onSubmit, onCancel }) {
               }}
             />
           </Grid>
-
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -124,7 +115,6 @@ export default function ProductForm({ product, onSubmit, onCancel }) {
               }}
             />
           </Grid>
-
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -156,7 +146,6 @@ export default function ProductForm({ product, onSubmit, onCancel }) {
               ))}
             </TextField>
           </Grid>
-
           <Grid item xs={12}>
             <TextField
               fullWidth
@@ -187,7 +176,6 @@ export default function ProductForm({ product, onSubmit, onCancel }) {
               }}
             />
           </Grid>
-
           <Grid item xs={12}>
             <TextField
               fullWidth
@@ -214,7 +202,6 @@ export default function ProductForm({ product, onSubmit, onCancel }) {
             />
           </Grid>
         </Grid>
-
         <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
           <StyledButton
             type="submit"

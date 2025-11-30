@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // ← Cambiado a "contexts" (plural)
+import { useAuth } from '../contexts/AuthContext'; 
 import {
   Box,
   Card,
@@ -18,7 +18,6 @@ import LockIcon from '@mui/icons-material/Lock';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoginIcon from '@mui/icons-material/Login';
-
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -28,26 +27,20 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-
   const from = location.state?.from?.pathname || '/';
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-
     if (!username || !password) {
       setError('Por favor, complete todos los campos');
       return;
     }
-
     if (password.length < 3) {
       setError('La contraseña debe tener al menos 3 caracteres');
       return;
     }
-
     const success = login(username, password);
     if (success) {
-      // Si es admin, redirigir al dashboard
       if (username.toLowerCase() === 'admin') {
         navigate('/admin', { replace: true });
       } else {
@@ -57,7 +50,6 @@ export default function Login() {
       setError('Credenciales inválidas');
     }
   };
-
   return (
     <Box
       sx={{
@@ -90,11 +82,11 @@ export default function Login() {
           <Box 
             component="form" 
             onSubmit={handleSubmit}
-            role="form" // ← ARIA
-            aria-labelledby="login-title" // ← ARIA
+            role="form" 
+            aria-labelledby="login-title" 
           >
             <Typography 
-              id="login-title" // ← ID para ARIA
+              id="login-title" 
               variant="h4" 
               align="center"
               gutterBottom
@@ -106,13 +98,11 @@ export default function Login() {
             >
               Iniciar Sesión
             </Typography>
-
             {error && (
               <Alert severity="error" sx={{ mb: 3 }}>
                 {error}
               </Alert>
             )}
-
             <TextField
               fullWidth
               label="Usuario"
@@ -120,9 +110,9 @@ export default function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              autoComplete="username" // ← Autocompletar
+              autoComplete="username" 
               inputProps={{
-                'aria-label': 'Nombre de usuario', // ← ARIA
+                'aria-label': 'Nombre de usuario', 
                 'aria-required': 'true'
               }}
               margin="normal"
@@ -148,7 +138,6 @@ export default function Login() {
                 },
               }}
             />
-
             <TextField
               fullWidth
               label="Contraseña"
@@ -157,7 +146,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              autoComplete="current-password" // ← Autocompletar
+              autoComplete="current-password" 
               inputProps={{
                 'aria-label': 'Contraseña',
                 'aria-required': 'true',
@@ -197,13 +186,12 @@ export default function Login() {
                 },
               }}
             />
-
             <StyledButton
               type="submit"
               fullWidth
               variant="contained"
               startIcon={<LoginIcon />}
-              aria-label="Ingresar al sistema" // ← ARIA
+              aria-label="Ingresar al sistema" 
               sx={{
                 mt: 3,
                 py: 1.5,
@@ -220,7 +208,6 @@ export default function Login() {
             >
               Ingresar
             </StyledButton>
-
             <Typography
               align="center"
               sx={{
@@ -231,7 +218,6 @@ export default function Login() {
             >
               👤 Usuario: <strong>admin</strong> | 🔑 Contraseña: <strong>admin</strong>
             </Typography>
-            
             <Typography
               align="center"
               sx={{

@@ -14,21 +14,18 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useCarrito } from "../contexts/CarritoContext";
-
 export default function ProductCard({ product }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const { addToCart, cartItems } = useCarrito();
-
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
   };
-
   return (
     <Badge
       badgeContent={getCartQuantity(product.id)}
-      aria-label={`${getCartQuantity(product.id)} unidades en el carrito`} // ← ARIA
+      aria-label={`${getCartQuantity(product.id)} unidades en el carrito`} 
       sx={{
         "& .MuiBadge-badge": {
           background: "linear-gradient(45deg, #ff6b6b, #ee5a24)",
@@ -44,8 +41,8 @@ export default function ProductCard({ product }) {
       }}
     >
       <Card
-        component="article" // ← Semántica
-        aria-label={`Producto: ${product.name}`} // ← ARIA
+        component="article" 
+        aria-label={`Producto: ${product.name}`} 
         sx={{
           height: 450,
           display: "flex",
@@ -67,7 +64,6 @@ export default function ProductCard({ product }) {
           }
         }}
       >
-        {/* Imagen */}
         <Box
           sx={{
             height: 200,
@@ -82,8 +78,8 @@ export default function ProductCard({ product }) {
         >
           <CardMedia
             component="img"
-            image={product.image || "https://via.placeholder.com/200"}
-            alt={`Imagen de ${product.name}`} // ← ALT descriptivo
+            image={product.image || "https:
+            alt={`Imagen de ${product.name}`} 
             sx={{
               maxWidth: "90%",
               maxHeight: "90%",
@@ -92,8 +88,6 @@ export default function ProductCard({ product }) {
             }}
           />
         </Box>
-
-        {/* Contenido */}
           <CardContent
             sx={{
               flexGrow: 1,
@@ -108,8 +102,8 @@ export default function ProductCard({ product }) {
                 color: theme.palette.mode === "dark" ? "#ffffff" : "#333333",
                 fontWeight: "bold",
                 mb: 1,
-                height: "2.2em", // ajustado para 2 líneas con lineHeight reducido
-                lineHeight: 1.1, // menor interlineado
+                height: "2.2em", 
+                lineHeight: 1.1, 
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 display: "-webkit-box",
@@ -119,7 +113,6 @@ export default function ProductCard({ product }) {
             >
               {product.name}
             </Typography>
-
             <Box sx={{ display: "flex", gap: 1, mb: 1.5 }}>
               <Chip
                 label={`$${parseFloat(product.price).toFixed(2)}`}
@@ -144,7 +137,6 @@ export default function ProductCard({ product }) {
                 />
               )}
             </Box>
-
             <Typography
               variant="body2"
               sx={{
@@ -160,15 +152,13 @@ export default function ProductCard({ product }) {
             >
               {product.descripcion || "Sin descripción"}
             </Typography>
-
-            {/* Botones */}
           <Box sx={{ display: "flex", gap: 1, mt: "auto" }}>
             <Button
               variant="outlined"
               fullWidth
               startIcon={<VisibilityIcon />}
               onClick={() => navigate(`/productos/${product.category || 'general'}/${product.id}`)}
-              aria-label={`Ver detalles de ${product.name}`} // ← ARIA
+              aria-label={`Ver detalles de ${product.name}`} 
               sx={{
                 borderColor: theme.palette.mode === "dark" ? "#bb86fc" : "#4CAF50",
                 color: theme.palette.mode === "dark" ? "#bb86fc" : "#4CAF50",
@@ -187,7 +177,7 @@ export default function ProductCard({ product }) {
               fullWidth
               startIcon={<AddShoppingCartIcon />}
               onClick={() => addToCart(product)}
-              aria-label={`Agregar ${product.name} al carrito`} // ← ARIA
+              aria-label={`Agregar ${product.name} al carrito`} 
               sx={{
                 background: "linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%)",
                 "&:hover": {
@@ -203,4 +193,3 @@ export default function ProductCard({ product }) {
     </Badge>
   );
 }
-

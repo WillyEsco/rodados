@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
 import { 
   Box, 
@@ -25,13 +24,11 @@ import StarIcon from "@mui/icons-material/Star";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useCarrito } from "../contexts/CarritoContext";
 import { Helmet } from 'react-helmet-async';
-
 export default function Home() {
   const { addToCart, cartItems } = useCarrito();
   const navigate = useNavigate();
   const theme = useTheme();
   const [featuredProducts, setFeaturedProducts] = useState([]);
-
   const features = [
     {
       icon: <LocalShippingIcon sx={{ fontSize: 40, color: '#4CAF50' }} />,
@@ -49,25 +46,19 @@ export default function Home() {
       description: "Soporte técnico especializado"
     }
   ];
-
-  // Cargar productos destacados de la API
   useEffect(() => {
-    fetch("https://68362e14664e72d28e401640.mockapi.io/producto")
+    fetch("https:
       .then((res) => res.json())
       .then((data) => {
-        // Seleccionar 3 productos aleatorios
         const shuffled = data.sort(() => 0.5 - Math.random());
         setFeaturedProducts(shuffled.slice(0, 3));
       })
       .catch((err) => console.error("Error al cargar productos destacados:", err));
   }, []);
-
-  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
   };
-
   return (
     <>
       <Helmet>
@@ -79,22 +70,20 @@ export default function Home() {
         <meta name="keywords" content="rodados, bicicletas, motos, scooters, tienda online, Argentina" />
         <meta property="og:title" content="Rodados eShop - Tu tienda online" />
         <meta property="og:description" content="Bicicletas, motos y scooters de calidad" />
-        <link rel="canonical" href="https://tu-dominio.com/" />
+        <link rel="canonical" href="https:
       </Helmet>
-
       <Box sx={{ 
         minHeight: '100vh',
         background: theme.palette.mode === 'dark' 
           ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
           : 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%)'
       }}>
-        {/* Hero Section */}
         <Container maxWidth="xl" sx={{ pt: { xs: 4, md: 8 }, pb: 6 }}>
           <Grid 
             container 
             spacing={{ xs: 2, md: 2 }} 
             alignItems="center" 
-            justifyContent="center" // ← Agregado
+            justifyContent="center" 
             sx={{ minHeight: { md: '500px' } }}
           >
             <Grid item xs={12} md={6}>
@@ -104,7 +93,7 @@ export default function Home() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                alignItems: { xs: 'center', md: 'flex-start' }, // ← Agregado
+                alignItems: { xs: 'center', md: 'flex-start' }, 
                 height: '100%'
               }}>
                 <Chip 
@@ -131,7 +120,7 @@ export default function Home() {
                     WebkitTextFillColor: 'transparent',
                     mb: 2,
                     lineHeight: 1.1,
-                    textAlign: { xs: 'center', md: 'left' } // ← Agregado
+                    textAlign: { xs: 'center', md: 'left' } 
                   }}
                 >
                   Rodados eShop
@@ -144,7 +133,7 @@ export default function Home() {
                     fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.1rem', lg: '1.4rem' },
                     lineHeight: 1.2,
                     fontWeight: 500,
-                    textAlign: { xs: 'center', md: 'left' } // ← Agregado
+                    textAlign: { xs: 'center', md: 'left' } 
                   }}
                 >
                   Tu destino premium
@@ -158,7 +147,7 @@ export default function Home() {
                     mb: 4,
                     fontSize: { xs: '0.95rem', sm: '1rem', md: '0.9rem', lg: '1rem' },
                     lineHeight: 1.3,
-                    textAlign: { xs: 'center', md: 'left' } // ← Agregado
+                    textAlign: { xs: 'center', md: 'left' } 
                   }}
                 >
                   Calidad excepcional y servicio personalizado.
@@ -166,7 +155,7 @@ export default function Home() {
                 <Stack 
                   direction={{ xs: 'column', sm: 'row' }} 
                   spacing={2}
-                  sx={{ width: { xs: '100%', sm: 'auto' } }} // ← Agregado
+                  sx={{ width: { xs: '100%', sm: 'auto' } }} 
                 >
                   <Button
                     variant="contained"
@@ -182,7 +171,7 @@ export default function Home() {
                       fontSize: '1.1rem',
                       fontWeight: 'bold',
                       transition: 'all 0.3s ease',
-                      width: { xs: '100%', sm: 'auto' }, // ← Agregado
+                      width: { xs: '100%', sm: 'auto' }, 
                       '&:hover': {
                         transform: 'translateY(-2px)',
                         boxShadow: '0 12px 24px rgba(76, 175, 80, 0.4)',
@@ -206,7 +195,7 @@ export default function Home() {
                       fontSize: '1.1rem',
                       fontWeight: 'bold',
                       transition: 'all 0.3s ease',
-                      width: { xs: '100%', sm: 'auto' }, // ← Agregado
+                      width: { xs: '100%', sm: 'auto' }, 
                       '&:hover': {
                         borderWidth: 2,
                         borderColor: '#1976d2',
@@ -228,14 +217,14 @@ export default function Home() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 height: '100%',
-                minHeight: { xs: 300, sm: 350 }, // ← Agregado: altura mínima
+                minHeight: { xs: 300, sm: 350 }, 
                 px: { xs: 2, md: 3 }
               }}>
                 <Box sx={{
                   position: 'relative',
                   display: 'inline-block',
                   animation: 'float 3s ease-in-out infinite',
-                  width: '100%', // ← Agregado
+                  width: '100%', 
                   maxWidth: { xs: 280, sm: 320, md: 350, lg: 400, xl: 420 }
                 }}>
                   <Box
@@ -245,8 +234,8 @@ export default function Home() {
                     sx={{
                       width: "100%",
                       height: "auto",
-                      display: 'block', // ← Agregado
-                      margin: '0 auto', // ← Agregado
+                      display: 'block', 
+                      margin: '0 auto', 
                       filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.2))'
                     }}
                   />
@@ -255,8 +244,6 @@ export default function Home() {
             </Grid>
           </Grid>
         </Container>
-
-        {/* Features Section */}
         <Container maxWidth="lg" sx={{ py: 6 }}>
           <Typography 
             variant="h3" 
@@ -326,8 +313,6 @@ export default function Home() {
             ))}
           </Grid>
         </Container>
-
-        {/* Featured Products Section */}
         <Container maxWidth="lg" sx={{ py: 6 }}>
           <Typography 
             variant="h3" 
@@ -422,7 +407,7 @@ export default function Home() {
                       }}>
                         <CardMedia
                           component="img"
-                          image={product.image || "https://via.placeholder.com/200"}
+                          image={product.image || "https:
                           alt={product.name}
                           sx={{
                             maxWidth: '100%',
@@ -521,8 +506,6 @@ export default function Home() {
             )}
           </Grid>
         </Container>
-
-        {/* Call to Action Section */}
         <Box sx={{
           background: theme.palette.mode === 'dark'
             ? 'linear-gradient(135deg, #6200ea, #7c4dff, #9c27b0)'
@@ -577,13 +560,11 @@ export default function Home() {
             </Box>
           </Container>
         </Box>
-
         <style jsx global>{`
           @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
           }
-          
           @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -593,5 +574,3 @@ export default function Home() {
     </>
   );
 }
-
-

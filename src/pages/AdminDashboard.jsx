@@ -34,9 +34,7 @@ import ProductForm from '../components/ProductForm';
 import CategoryManager from '../components/CategoryManager';
 import { useAuth } from '../contexts/AuthContext';
 import { categoryManager } from '../utils/categoryManager';
-
-const API_URL = 'https://68362e14664e72d28e401640.mockapi.io/producto';
-
+const API_URL = 'https:
 export default function AdminDashboard() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -50,21 +48,17 @@ export default function AdminDashboard() {
   const [categories, setCategories] = useState([]);
   const theme = useTheme();
   const { user } = useAuth();
-
   useEffect(() => {
     loadProducts();
     loadCategories();
   }, []);
-
   useEffect(() => {
     calculateStats();
     filterProducts();
   }, [products, searchTerm, selectedCategory]);
-
   const loadCategories = () => {
     setCategories(['Todos', ...categoryManager.getCategories()]);
   };
-
   const loadProducts = async () => {
     try {
       setLoading(true);
@@ -77,41 +71,31 @@ export default function AdminDashboard() {
       setLoading(false);
     }
   };
-
   const filterProducts = () => {
     let result = products;
-
-    // Filtrar por categoría
     if (selectedCategory !== 'Todos') {
       result = result.filter(p => {
         const prodCat = (p.category || '').trim().toLowerCase();
         const filterCat = selectedCategory.trim().toLowerCase();
-        
         console.log(`🔍 Comparando: "${p.name}" categoria="${prodCat}" vs filtro="${filterCat}"`);
-        
         return prodCat === filterCat;
       });
     }
-
-    // Filtrar por búsqueda
     if (searchTerm.trim() !== '') {
       result = result.filter(p =>
         p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (p.descripcion && p.descripcion.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
-
     console.log(`📊 Resultados: ${result.length} de ${products.length} productos`);
     setFilteredProducts(result);
   };
-
   const calculateStats = () => {
     const total = products.length;
     const totalValue = products.reduce((sum, p) => sum + parseFloat(p.price || 0), 0);
     const avgPrice = total > 0 ? totalValue / total : 0;
     setStats({ total, avgPrice, totalValue });
   };
-
   const handleAddProduct = async (productData) => {
     try {
       const response = await fetch(API_URL, {
@@ -124,37 +108,31 @@ export default function AdminDashboard() {
         setOpenDialog(false);
       } else {
         console.error('❌ Error al crear producto:', response.status);
-        alert('Error al crear el producto. Intenta nuevamente.'); // ← Mensaje al usuario
+        alert('Error al crear el producto. Intenta nuevamente.'); 
       }
     } catch (error) {
       console.error('❌ Error de red:', error);
-      alert('Error de conexión. Verifica tu red e intenta nuevamente.'); // ← Mensaje al usuario
+      alert('Error de conexión. Verifica tu red e intenta nuevamente.'); 
     }
   };
-
   const handleEdit = (product) => {
     setEditingProduct(product);
     setOpenDialog(true);
   };
-
   const handleUpdateProduct = async (productData) => {
     try {
-      // Normaliza la propiedad a 'category'
       const dataToSend = { 
         ...productData, 
         category: productData.category || productData.categoria 
       };
       delete dataToSend.categoria;
-
-      // PUT a MockAPI
       const response = await fetch(`${API_URL}/${editingProduct.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend)
       });
-
       if (response.ok) {
-        loadProducts(); // Recargar lista
+        loadProducts(); 
         setOpenDialog(false);
         setEditingProduct(null);
         console.log('✅ Producto actualizado correctamente');
@@ -165,7 +143,6 @@ export default function AdminDashboard() {
       console.error('❌ Error de red al actualizar:', error);
     }
   };
-
   const handleDeleteProduct = async (id) => {
     if (window.confirm('¿Estás seguro de eliminar este producto?')) {
       try {
@@ -183,12 +160,10 @@ export default function AdminDashboard() {
       }
     }
   };
-
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setEditingProduct(null);
   };
-
   return (
     <Box
       sx={{
@@ -200,7 +175,6 @@ export default function AdminDashboard() {
       }}
     >
       <Container maxWidth="xl" sx={{ pt: 4, pb: 6 }}>
-        {/* Header */}
         <Box sx={{ mb: 4 }}>
           <Typography
             variant="h3"
@@ -222,8 +196,6 @@ export default function AdminDashboard() {
             Bienvenido, {user?.username || 'Admin'}
           </Typography>
         </Box>
-
-        {/* Stats Cards - Centradas y del mismo tamaño */}
         <Grid container spacing={3} sx={{ mb: 4 }} justifyContent="center">
           <Grid item xs={12} sm={6} md={4}>
             <Card
@@ -310,8 +282,6 @@ export default function AdminDashboard() {
             </Card>
           </Grid>
         </Grid>
-
-        {/* Barra de búsqueda y filtros */}
         <Paper
           elevation={3}
           sx={{
@@ -327,7 +297,6 @@ export default function AdminDashboard() {
             borderRadius: 3
           }}
         >
-          {/* Búsqueda */}
           <TextField
             fullWidth
             placeholder="Buscar productos..."
@@ -347,7 +316,6 @@ export default function AdminDashboard() {
               }
             }}
           />
-          {/* Filtros por categoría */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <FilterListIcon sx={{ color: theme.palette.mode === 'dark' ? '#bb86fc' : '#4CAF50' }} />
             <Typography variant="h6" sx={{ color: theme.palette.mode === 'dark' ? '#ffffff' : '#333333' }}>
@@ -389,7 +357,6 @@ export default function AdminDashboard() {
               />
             ))}
           </Box>
-          {/* Contador de resultados */}
           <Typography
             variant="body2"
             sx={{ color: theme.palette.mode === 'dark' ? '#b0b0b0' : '#666666', textAlign: 'center' }}
@@ -431,8 +398,6 @@ export default function AdminDashboard() {
             </Box>
           )}
         </Paper>
-
-        {/* Products Grid - CSS Grid para cards perfectamente iguales */}
         <Box
           sx={{
             display: 'grid',
@@ -451,7 +416,7 @@ export default function AdminDashboard() {
               key={product.id}
               sx={{
                 width: '100%',
-                height: 500, // ← Altura FIJA uniforme
+                height: 500, 
                 display: 'flex',
                 flexDirection: 'column',
                 background: theme.palette.mode === 'dark'
@@ -492,7 +457,6 @@ export default function AdminDashboard() {
                 }
               }}
             >
-              {/* Imagen - 200px fijos */}
               <Box
                 sx={{
                   height: 200,
@@ -508,7 +472,7 @@ export default function AdminDashboard() {
                 }}
               >
                 <img
-                  src={product.image || 'https://via.placeholder.com/200'}
+                  src={product.image || 'https:
                   alt={product.name}
                   style={{
                     maxWidth: '85%',
@@ -518,7 +482,6 @@ export default function AdminDashboard() {
                   }}
                 />
               </Box>
-              {/* Contenido - flex-grow */}
               <CardContent
                 sx={{
                   flexGrow: 1,
@@ -528,7 +491,6 @@ export default function AdminDashboard() {
                   overflow: 'hidden'
                 }}
               >
-                {/* Título - 2 líneas máximo */}
                 <Typography
                   variant="h6"
                   sx={{
@@ -547,7 +509,6 @@ export default function AdminDashboard() {
                 >
                   {product.name}
                 </Typography>
-                {/* Precio y Categoría */}
                 <Box sx={{ display: 'flex', gap: 1, mb: 1.5, flexWrap: 'wrap', minHeight: 32 }}>
                   <Chip
                     label={`$${parseFloat(product.price || 0).toFixed(2)}`}
@@ -575,7 +536,6 @@ export default function AdminDashboard() {
                     />
                   )}
                 </Box>
-                {/* Descripción - 3 líneas máximo */}
                 <Typography
                   variant="body2"
                   sx={{
@@ -594,7 +554,6 @@ export default function AdminDashboard() {
                   {product.descripcion || 'Sin descripción disponible'}
                 </Typography>
               </CardContent>
-              {/* Botones - 70px fijos al final */}
               <Box
                 sx={{
                   height: 70,
@@ -656,8 +615,6 @@ export default function AdminDashboard() {
             </Card>
           ))}
         </Box>
-
-        {/* FAB Button para agregar producto */}
         <Tooltip title="Agregar Producto">
           <Fab
             color="primary"
@@ -678,8 +635,6 @@ export default function AdminDashboard() {
             <AddIcon />
           </Fab>
         </Tooltip>
-
-        {/* Dialog Form Producto */}
         <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
           <ProductForm
             product={editingProduct}
@@ -687,8 +642,6 @@ export default function AdminDashboard() {
             onCancel={handleCloseDialog}
           />
         </Dialog>
-
-        {/* Dialog Gestión de Categorías */}
         <Dialog open={openCategoryDialog} onClose={() => setOpenCategoryDialog(false)} maxWidth="sm" fullWidth>
           <CategoryManager
             onClose={() => {

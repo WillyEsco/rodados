@@ -1,4 +1,3 @@
-// src/pages/Checkout.jsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -27,59 +26,42 @@ import {
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
 const Checkout = ({ cartItems, clearCart, onClose }) => {
   const theme = useTheme();
   const { user } = useAuth();
   const navigate = useNavigate();
-  
   const [processing, setProcessing] = useState(false);
   const [purchaseComplete, setPurchaseComplete] = useState(false);
   const [orderNumber] = useState(() => `ORD-${Date.now()}`);
-
   const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-
   const handlePurchase = async () => {
     setProcessing(true);
-
     try {
-      // Simular procesamiento de pago
       await new Promise(resolve => setTimeout(resolve, 2500));
-      
-      // Simular envío de email
       await sendConfirmationEmail();
-      
       setPurchaseComplete(true);
-      
-      // Limpiar carrito después de compra exitosa
       setTimeout(() => {
         clearCart();
       }, 3000);
-      
     } catch (error) {
       console.error('Error processing purchase:', error);
     } finally {
       setProcessing(false);
     }
   };
-
   const sendConfirmationEmail = async () => {
-    // Simular envío de email - en producción se conectaría a un servicio real
     console.log(`📧 Email enviado a ${user.email}:`);
     console.log(`
     ¡Has comprado en Rodados eShop!
     Muchas gracias por confiar en nosotros.
-    
     Detalles de tu compra:
     - Número de orden: ${orderNumber}
     - Total: $${total}
     - Productos: ${totalItems} items
-    
     ¡Esperamos verte pronto!
     `);
   };
-
   const handleClose = () => {
     if (purchaseComplete) {
       clearCart();
@@ -87,7 +69,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
     }
     onClose();
   };
-
   if (purchaseComplete) {
     return (
       <Dialog 
@@ -144,7 +125,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
       </Dialog>
     );
   }
-
   return (
     <Box
       sx={{
@@ -181,7 +161,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
         }}
       >
         <CardContent sx={{ p: 4 }}>
-          {/* Header */}
           <Typography 
             variant="h4" 
             fontWeight="bold"
@@ -196,8 +175,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
           >
             🛒 Finalizar Compra
           </Typography>
-
-          {/* User Info */}
           <Paper 
             sx={{ 
               p: 3, 
@@ -228,8 +205,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
               </Typography>
             )}
           </Paper>
-
-          {/* Order Summary */}
           <Paper 
             sx={{ 
               p: 3, 
@@ -243,7 +218,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
             <Typography variant="h6" fontWeight="600" sx={{ mb: 2 }}>
               📋 Resumen del Pedido
             </Typography>
-            
             <List sx={{ py: 0 }}>
               {cartItems.map((item, index) => (
                 <React.Fragment key={item.id}>
@@ -265,9 +239,7 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
                 </React.Fragment>
               ))}
             </List>
-            
             <Divider sx={{ my: 2 }} />
-            
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant="h6" fontWeight="bold">
                 Total ({totalItems} productos):
@@ -281,8 +253,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
               </Typography>
             </Box>
           </Paper>
-
-          {/* Purchase Buttons */}
           <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
             <Button
               variant="contained"
@@ -309,7 +279,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
                 '💳 Confirmar Compra'
               )}
             </Button>
-            
             <Button
               variant="outlined"
               onClick={onClose}
@@ -330,8 +299,6 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
               Cancelar
             </Button>
           </Box>
-
-          {/* Info Message */}
           <Alert severity="info" sx={{ mt: 3 }}>
             <Typography variant="body2">
               Al confirmar tu compra, recibirás un email de confirmación en <strong>{user.email}</strong>
@@ -342,5 +309,4 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
     </Box>
   );
 };
-
 export default Checkout;

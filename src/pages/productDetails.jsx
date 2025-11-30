@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import StyledButton from "../components/StyledButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useCarrito } from "../contexts/CarritoContext"; // ← Cambiado a "contexts"
+import { useCarrito } from "../contexts/CarritoContext"; 
 import Chip from "@mui/material/Chip";
-
 import {
   Box,
   Typography,
@@ -18,14 +17,11 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Cart from "../components/Cart";
-
 export default function ProductDetail() {
   const { id } = useParams();
   const theme = useTheme();
   const [product, setProduct] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
-  
-  // Usar el contexto del carrito en lugar de props
   const {
     cartItems,
     addToCart,
@@ -34,23 +30,19 @@ export default function ProductDetail() {
     removeItem,
     clearCart
   } = useCarrito();
-
-  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
   };
-
   useEffect(() => {
-    fetch(`https://68362e14664e72d28e401640.mockapi.io/producto/${id}`)
+    fetch(`https:
       .then((res) => res.json())
       .then((data) => {
-        console.log("Producto recibido:", data); // <-- Agrego para ver el prod que traigo
+        console.log("Producto recibido:", data); 
         setProduct(data);
       })
       .catch((err) => console.error("Error al cargar producto:", err));
   }, [id]);
-
   if (!product) {
     return (
       <Box sx={{ 
@@ -74,7 +66,6 @@ export default function ProductDetail() {
       </Box>
     );
   }
-
   return (
     <Box sx={{ 
       minHeight: '100vh',
@@ -83,7 +74,6 @@ export default function ProductDetail() {
         : 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%)'
     }}>
       <Container maxWidth="md" sx={{ pt: 4, pb: 6 }}>
-        {/* Botón cerrar adaptado al tema */}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
           <IconButton 
             onClick={() => window.history.back()}
@@ -113,7 +103,6 @@ export default function ProductDetail() {
             <CloseIcon sx={{ fontSize: 20 }} />
           </IconButton>
         </Box>
-
         <Card
           sx={{
             display: "flex",
@@ -170,7 +159,7 @@ export default function ProductDetail() {
             }}>
               <CardMedia
                 component="img"
-                image={product.image || "https://via.placeholder.com/300"}
+                image={product.image || "https:
                 alt={product.name}
                 sx={{
                   maxWidth: '90%',
@@ -184,7 +173,6 @@ export default function ProductDetail() {
               />
             </Box>
           </Badge>
-
           <Box flex={1} display="flex" flexDirection="column" justifyContent="center">
             <Typography 
               variant="h4" 
@@ -199,7 +187,6 @@ export default function ProductDetail() {
             >
               {product.name}
             </Typography>
-            {/* Chip de categoría debajo del nombre */}
               <Typography> 
                 {console.log("Categoria:", product.category)}
             {product.category && (
@@ -239,7 +226,6 @@ export default function ProductDetail() {
             >
               {product.descripcion || "Este producto no tiene descripción disponible."}
             </Typography>
-
           <Box sx={{ mt: 4 }}>
             <StyledButton
               variant="contained"
@@ -251,15 +237,14 @@ export default function ProductDetail() {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 1,
-                py: { xs: 1.5, sm: 1.2 }, // Más padding en móvil
-                fontSize: { xs: "1rem", sm: "0.95rem" }, // Font más grande en móvil
+                py: { xs: 1.5, sm: 1.2 }, 
+                fontSize: { xs: "1rem", sm: "0.95rem" }, 
                 fontWeight: "600",
                 background: "linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%)",
                 color: "#fff",
                 position: "relative",
                 overflow: "hidden",
                 boxShadow: "0 4px 15px rgba(76, 175, 80, 0.4)",
-                // Efectos hover y active unificados
                 "@media (hover: hover)": {
                   "&:hover": {
                     background: "linear-gradient(135deg, #66bb6a 0%, #4caf50 50%, #388e3c 100%)",
@@ -273,7 +258,6 @@ export default function ProductDetail() {
                     }
                   }
                 },
-                // Efecto active para móvil (touch) - forzando color original
                 "&:active": {
                   background: "linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%) !important",
                   transform: "scale(0.98)",
@@ -282,7 +266,6 @@ export default function ProductDetail() {
                     animation: "cartBounce 0.4s ease-in-out"
                   }
                 },
-                // Forzar colores después del click
                 "&:focus": {
                   background: "linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%) !important"
                 },
@@ -314,7 +297,7 @@ export default function ProductDetail() {
                   sx={{
                     filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
                     transition: "all 0.3s ease",
-                    fontSize: { xs: "1.2rem", sm: "1rem" } // Ícono más grande en móvil
+                    fontSize: { xs: "1.2rem", sm: "1rem" } 
                   }}
                 />
               }
@@ -324,10 +307,6 @@ export default function ProductDetail() {
           </Box>
         </Box>
       </Card>
-
-
-
-        {/* Drawer del carrito */}
         <Cart
           open={cartOpen}
           onClose={() => setCartOpen(false)}
