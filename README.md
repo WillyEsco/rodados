@@ -464,7 +464,7 @@ Implementamos meta tags Open Graph completos para previews perfectos en WhatsApp
 
 <br>
 
-[![🚀 Ver Demo Live](https://img.shields.io/badge/🚀_DEMO_LIVE-rodados--eshop.vercel.app-00C7B7?style=for-the-badge&logo=vercel&logoColor=white&labelColor=000000)](https://rodados-eshop.vercel.app/)
+[![🚀 Ver Demo Live](https://img.shields.io/badge/🚀_DEMO_LIVE-rodados--eshop.vercel.app-00C7B7?style=for-the-badge&logo=vercel&logoColor=white&labelColor=000000)](https://rodados-eshop.vercel-v2.app/)
 
 <br>
 
