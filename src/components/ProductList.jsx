@@ -17,8 +17,10 @@ import { styled } from "@mui/material/styles";
 import "../styles/ProductList.css";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import spinnerImage from "../assets/spinner.png";
+import spinnerImage from "/assets/spinner.png";
+import errorImage from "/assets/desconectado.png";
 
+// Estilos MD3 para Card y Button - Glassmorphism como Home
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
   background: theme.palette.mode === 'dark' 
@@ -49,34 +51,54 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
   const theme = useTheme();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("https://68362e14664e72d28e401640.mockapi.io/producto")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("No se pudo cargar productos");
+        return res.json();
+      })
       .then((data) => {
         setProducts(data);
         setFilteredProducts(data); // Inicialmente mostrar todos
+        setError("");
       })
-      .catch((err) => console.error("Error al cargar productos:", err));
+      .catch((err) => {
+        setError("Error al cargar productos. Intenta nuevamente más tarde.");
+        setProducts([]);
+        setFilteredProducts([]);
+        console.error("Error al cargar productos:", err);      
+      });
   }, []);
 
+  // Filtrar productos según la categoría seleccionada
   useEffect(() => {
-    if (categoryFilter === 'todo') {
+    if (categoryFilter === 'todo' || categoryFilter === 'Todos') {
       setFilteredProducts(products);
     } else {
+      const filterCategory = categoryFilter.trim().toLowerCase();
       const filtered = products.filter(product => {
-        const productCategory = product.category?.toLowerCase();
-        const filterCategory = categoryFilter.toLowerCase();
-        
-        if (filterCategory === 'adultos') {
-          return productCategory === 'adult';
-        }
-        return productCategory === filterCategory;
+        // Soportar ambas propiedades: categoria y category
+        const prodCat = (
+          product.categoria ||
+          product.category ||
+          product.Category ||
+          product.Categoria ||
+          ''
+        ).trim().toLowerCase();
+
+        // Debug: ver qué categorías tiene cada producto
+        // Puedes quitar este log luego de probar
+        console.log('Filtro:', filterCategory, 'Producto:', product.name, 'Categoria:', prodCat);
+
+        return prodCat === filterCategory;
       });
       setFilteredProducts(filtered);
     }
   }, [products, categoryFilter]);
 
+  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
@@ -84,7 +106,24 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
 
   return (
     <Grid container spacing={3} justifyContent="center">
-      {filteredProducts.length === 0 ? (
+      {error ? (
+        <Box sx={{ width: "100%", textAlign: "center", mt: 2 }}>
+          <img
+            src={errorImage}
+            alt="Error de conexión"
+            style={{ width: 150, marginBottom: 20, display: "inline-block" }}
+          />
+          <Typography variant="h6" sx={{ 
+            mb: 2, 
+            color: theme.palette.error.main,
+            textShadow: theme.palette.mode === 'dark'
+              ? "2px 2px 8px rgba(0,0,0,0.5)"
+              : "2px 2px 8px rgba(0,0,0,0.18)"
+          }}>
+            {error}
+          </Typography>
+        </Box>
+      ) : filteredProducts.length === 0 ? (
         <Box sx={{ width: "100%", textAlign: "center", mt: 2 }}>
           <Typography variant="h6" sx={{ 
             mb: 2, 
@@ -147,7 +186,7 @@ export default function ProductList({ onAddToCart, cartItems = [], categoryFilte
               <Box sx={{ 
                 height: 200, 
                 background: theme.palette.mode === 'dark' 
-                  ? 'linear-gradient(135deg, #7c4dff 0%, #9c27b0 50%, #673ab7 100%)'
+                  ? 'linear-gradient(135deg, #8e6c88 0%, #b8a3b8 50%, #d4c2d4 100%)'
                   : '#f5f5f5',
                 display: 'flex',
                 alignItems: 'center',

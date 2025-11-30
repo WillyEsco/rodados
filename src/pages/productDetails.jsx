@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import StyledButton from "../components/StyledButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useCarrito } from "../contexts/CarritoContext"; // ← Cambiado a "contexts"
+import Chip from "@mui/material/Chip";
 
 import {
   Box,
@@ -18,19 +19,23 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import Cart from "../components/Cart";
 
-export default function ProductDetail({
-  onAddToCart,
-  cartItems,
-  increaseQty,
-  decreaseQty,
-  removeItem,
-  clearCart,
-}) {
+export default function ProductDetail() {
   const { id } = useParams();
   const theme = useTheme();
   const [product, setProduct] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
+  
+  // Usar el contexto del carrito en lugar de props
+  const {
+    cartItems,
+    addToCart,
+    increaseQty,
+    decreaseQty,
+    removeItem,
+    clearCart
+  } = useCarrito();
 
+  // Función para obtener la cantidad de un producto en el carrito
   const getCartQuantity = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
@@ -39,7 +44,10 @@ export default function ProductDetail({
   useEffect(() => {
     fetch(`https://68362e14664e72d28e401640.mockapi.io/producto/${id}`)
       .then((res) => res.json())
-      .then((data) => setProduct(data))
+      .then((data) => {
+        console.log("Producto recibido:", data); // <-- Agrego para ver el prod que traigo
+        setProduct(data);
+      })
       .catch((err) => console.error("Error al cargar producto:", err));
   }, [id]);
 
@@ -75,6 +83,7 @@ export default function ProductDetail({
         : 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%)'
     }}>
       <Container maxWidth="md" sx={{ pt: 4, pb: 6 }}>
+        {/* Botón cerrar adaptado al tema */}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
           <IconButton 
             onClick={() => window.history.back()}
@@ -150,7 +159,7 @@ export default function ProductDetail({
               width: { xs: "100%", md: 300 },
               height: { xs: 250, md: 300 },
               background: theme.palette.mode === 'dark' 
-                ? 'linear-gradient(135deg, #7c4dff 0%, #9c27b0 50%, #673ab7 100%)'
+                ? 'linear-gradient(135deg, #8e6c88 0%, #b8a3b8 50%, #d4c2d4 100%)'
                 : '#f5f5f5',
               borderRadius: 2,
               display: 'flex',
@@ -190,6 +199,25 @@ export default function ProductDetail({
             >
               {product.name}
             </Typography>
+            {/* Chip de categoría debajo del nombre */}
+              <Typography> 
+                {console.log("Categoria:", product.category)}
+            {product.category && (
+              <Chip
+                label={product.category}
+                size="medium"
+                sx={{
+                  mb: 2,
+                  background: theme.palette.mode === 'dark'
+                    ? 'rgba(187, 134, 252, 0.2)'
+                    : 'rgba(76, 175, 80, 0.1)',
+                  color: theme.palette.mode === 'dark' ? '#bb86fc' : '#2e7d32',
+                  fontWeight: 600,
+                  fontSize: '1rem'
+                }}
+              />
+            )}
+            </Typography> 
             <Typography 
               variant="h5" 
               gutterBottom
@@ -215,7 +243,7 @@ export default function ProductDetail({
           <Box sx={{ mt: 4 }}>
             <StyledButton
               variant="contained"
-              onClick={() => onAddToCart(product)}
+              onClick={() => addToCart(product)}
               fullWidth
               sx={{
                 mt: "auto",
@@ -245,6 +273,7 @@ export default function ProductDetail({
                     }
                   }
                 },
+                // Efecto active para móvil (touch) - forzando color original
                 "&:active": {
                   background: "linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%) !important",
                   transform: "scale(0.98)",
@@ -253,6 +282,7 @@ export default function ProductDetail({
                     animation: "cartBounce 0.4s ease-in-out"
                   }
                 },
+                // Forzar colores después del click
                 "&:focus": {
                   background: "linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%) !important"
                 },
@@ -297,6 +327,7 @@ export default function ProductDetail({
 
 
 
+        {/* Drawer del carrito */}
         <Cart
           open={cartOpen}
           onClose={() => setCartOpen(false)}

@@ -1,3 +1,4 @@
+// src/pages/About.jsx
 import React, { useState } from "react";
 import { 
   Box, 
@@ -51,8 +52,10 @@ export default function About() {
         : 'linear-gradient(135deg, #f3e5f5 0%, #e1bee7 30%, #ce93d8 70%, #ba68c8 100%)',
       py: { xs: 4, md: 8 }
     }}>
+      {/* Hero Section con Logo y Mascotas */}
       <Container maxWidth="xl" sx={{ mb: 8 }}>
         <Box sx={{ textAlign: 'center', position: 'relative' }}>
+          {/* Mascota izquierda flotante */}
           <Box sx={{
             position: 'absolute',
             left: { xs: '5%', md: '10%' },
@@ -73,6 +76,7 @@ export default function About() {
             />
           </Box>
 
+          {/* Mascota derecha flotante */}
           <Box sx={{
             position: 'absolute',
             right: { xs: '5%', md: '10%' },
@@ -93,6 +97,7 @@ export default function About() {
             />
           </Box>
 
+          {/* Logo Principal */}
           <Box sx={{ mb: 4, position: 'relative', zIndex: 3 }}>
             <img
               src={logotipoTop}
@@ -107,6 +112,7 @@ export default function About() {
             />
           </Box>
 
+          {/* Badges decorativos */}
           <Stack 
             direction={{ xs: 'column', sm: 'row' }} 
             spacing={2} 
@@ -147,6 +153,7 @@ export default function About() {
             />
           </Stack>
 
+          {/* Descripción mejorada */}
           <Typography
             variant="h5"
             align="center"
@@ -182,6 +189,7 @@ export default function About() {
         </Box>
       </Container>
 
+      {/* Sección de Cards Mejoradas */}
       <Container maxWidth="lg" sx={{ mb: 6 }}>
         <Typography
           variant="h3"

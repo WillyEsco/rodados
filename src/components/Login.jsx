@@ -1,3 +1,4 @@
+// src/components/Login.jsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -63,6 +64,7 @@ const Login = ({ onClose, onLoginSuccess }) => {
     setError('');
 
     try {
+      // Simular delay de login
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       const userData = {
@@ -138,6 +140,7 @@ const Login = ({ onClose, onLoginSuccess }) => {
         }}
       >
         <CardContent sx={{ p: { xs: 2, sm: 4 } }}>
+          {/* Header */}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
             <Typography 
               variant="h4" 
@@ -246,6 +249,7 @@ const Login = ({ onClose, onLoginSuccess }) => {
             </Button>
           </Box>
 
+          {/* Divider */}
           <Divider sx={{ my: 3 }}>
             <Typography variant="body2" sx={{ color: 'text.secondary', px: 2 }}>
               O continuar con

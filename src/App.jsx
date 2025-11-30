@@ -1,138 +1,52 @@
-import React, { useState, useEffect } from "react";
+// src/App.jsx
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
+import { HelmetProvider } from 'react-helmet-async'; // ← Agregar
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { AuthProvider } from "./contexts/AuthContext";
-import { ScrollToTop } from "./hooks/useScrollToTop";
+import { CarritoProvider } from "./contexts/CarritoContext";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CartWithAuth from "./components/CartWithAuth";
 import BottomNavigation from "./components/BottomNavigation";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
 
+// Pages
 import Home from "./pages/home";
 import Products from "./pages/products";       
 import ProductDetail from "./pages/productDetails"; 
 import About from "./pages/about";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import AdminDashboard from "./pages/AdminDashboard";
 
-export default function App() {
+// Componente interno que puede usar useAuth
+function AppContent() {
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    const savedCart = localStorage.getItem("cartItems");
-    if (savedCart) setCartItems(JSON.parse(savedCart));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const addToCart = (product) => {
-    setCartItems((prev) => {
-      const itemExists = prev.find((item) => item.id === product.id);
-      if (itemExists) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prev, { ...product, quantity: 1 }];
-    });
-  };
-
-  const increaseQty = (id) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  const decreaseQty = (id) => {
-    setCartItems((prev) =>
-      prev
-        .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
-  };
-
-  const removeItem = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
-  };
 
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <Router>
-          <ScrollToTop />
-          <Box display="flex" flexDirection="column" minHeight="100vh">
-          <Header onCartClick={() => setCartOpen(true)} cartItems={cartItems} />
+    <Router>
+      <Box display="flex" flexDirection="column" minHeight="100vh">
+        <Header onCartClick={() => setCartOpen(true)} />
 
-        <Box component="main" flexGrow={1} p={2}>
+        <Box component="main" flexGrow={1}>
           <Routes>
-            <Route 
-              path="/" 
-              element={
-                <Home 
-                  onAddToCart={addToCart}
-                  cartItems={cartItems}
-                />
-              } 
-            />
-
-            <Route
-              path="/productos"
-              element={
-                <Products
-                  cartItems={cartItems}
-                  addToCart={addToCart}
-                  increaseQty={increaseQty}
-                  decreaseQty={decreaseQty}
-                  removeItem={removeItem}
-                  clearCart={clearCart}
-                />
-              }
-            />
-
-            <Route
-              path="/productos/:categoria"
-              element={
-                <Products
-                  cartItems={cartItems}
-                  addToCart={addToCart}
-                  increaseQty={increaseQty}
-                  decreaseQty={decreaseQty}
-                  removeItem={removeItem}
-                  clearCart={clearCart}
-                />
-              }
-            />
-
-            <Route
-              path="/productos/:categoria/:id"
-              element={
-                <ProductDetail
-                  cartItems={cartItems}
-                  onAddToCart={addToCart}
-                  increaseQty={increaseQty}
-                  decreaseQty={decreaseQty}
-                  removeItem={removeItem}
-                  clearCart={clearCart}
-                />
-              }
-            />
-
+            <Route path="/" element={<Home />} />
+            <Route path="/productos" element={<Products />} />
+            <Route path="/productos/:categoria" element={<Products />} />
+            <Route path="/productos/:categoria/:id" element={<ProductDetail />} />
             <Route path="/nosotros" element={<About />} />
-            
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/admin"
+              element={
+                <AdminProtectedRoute>
+                  <AdminDashboard />
+                </AdminProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Box>
@@ -141,29 +55,36 @@ export default function App() {
           <Footer />
         </Box>
 
-        <BottomNavigation 
-          onCartClick={() => setCartOpen(true)}
-          cartItems={cartItems}
-        />
+        <BottomNavigation onCartClick={() => setCartOpen(true)} />
 
         <CartWithAuth
           open={cartOpen}
           onClose={() => setCartOpen(false)}
-          items={cartItems}
-          increaseQty={increaseQty}
-          decreaseQty={decreaseQty}
-          removeItem={removeItem}
-          clearCart={clearCart}
         />
 
-        <Box sx={{ 
-          height: { xs: 70, md: 0 },  // Altura del BottomNavigation
-          display: { xs: 'block', md: 'none' }
-        }} />
+        <Box 
+          sx={{ 
+            height: { xs: '85px', md: 0 },
+            display: { xs: 'block', md: 'none' },
+            flexShrink: 0
+          }} 
+        />
+      </Box>
+    </Router>
+  );
+}
 
-        </Box>
-      </Router>
-      </AuthProvider>
-    </ThemeProvider>
+// Componente principal con providers
+export default function App() {
+  return (
+    <HelmetProvider> {/* ← Envolver todo */}
+      <ThemeProvider>
+        <AuthProvider>
+          <CarritoProvider>
+            <AppContent />
+          </CarritoProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }

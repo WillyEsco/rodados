@@ -44,12 +44,15 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
     setProcessing(true);
 
     try {
+      // Simular procesamiento de pago
       await new Promise(resolve => setTimeout(resolve, 2500));
       
+      // Simular envío de email
       await sendConfirmationEmail();
       
       setPurchaseComplete(true);
       
+      // Limpiar carrito después de compra exitosa
       setTimeout(() => {
         clearCart();
       }, 3000);
@@ -62,6 +65,7 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
   };
 
   const sendConfirmationEmail = async () => {
+    // Simular envío de email - en producción se conectaría a un servicio real
     console.log(`📧 Email enviado a ${user.email}:`);
     console.log(`
     ¡Has comprado en Rodados eShop!
@@ -193,6 +197,7 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
             🛒 Finalizar Compra
           </Typography>
 
+          {/* User Info */}
           <Paper 
             sx={{ 
               p: 3, 
@@ -224,6 +229,7 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
             )}
           </Paper>
 
+          {/* Order Summary */}
           <Paper 
             sx={{ 
               p: 3, 
@@ -276,6 +282,7 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
             </Box>
           </Paper>
 
+          {/* Purchase Buttons */}
           <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
             <Button
               variant="contained"
@@ -324,6 +331,7 @@ const Checkout = ({ cartItems, clearCart, onClose }) => {
             </Button>
           </Box>
 
+          {/* Info Message */}
           <Alert severity="info" sx={{ mt: 3 }}>
             <Typography variant="body2">
               Al confirmar tu compra, recibirás un email de confirmación en <strong>{user.email}</strong>

@@ -1,12 +1,12 @@
 <div align="center">
 
-# 🚲✨ **RODADOS eSHOP** ✨🚲
+# 🚲✨ **RODADOS eSHOP v2.0** ✨🚲
 ### *La Revolución del eCommerce con Glassmorphism*
 > 🎉 **¡Ahora disponible en GitHub Pages!**
 
 <br>
 
-  <img src="https://fabystudios.github.io/Rodados/assets/logo-ppal.png" alt="Rodados eShop Logo" width="150" style="margin: 20px 0;"/>
+  <img src="https://fabystudios.github.io/Rodados/assets/logotipo-top.png" alt="Rodados eShop Logo" width="300" style="margin: 20px 0;"/>
 
 <br>
 
@@ -460,7 +460,7 @@ Implementamos meta tags Open Graph completos para previews perfectos en WhatsApp
 
 ### 🚀 **¡Probá la App AHORA MISMO!**
 
-**🔗 URL OFICIAL:** [`https://rodados-eshop.vercel.app/`](https://rodados-eshop.vercel.app/)
+**🔗 URL OFICIAL:** [`rodados-eshop-v2.vercel.app/`](https://rodados-eshop-v2.vercel.app/)
 
 <br>
 
@@ -541,7 +541,7 @@ graph LR
 
 ```bash
 # 🎯 Paso 1: Clonar el Universo
-git clone https://github.com/fabystudios/Rodados.git
+git clone https://github.com/WillyEsco/Rodados.git
 cd Rodados
 
 # ⚡ Paso 2: Instalar la Magia
@@ -856,7 +856,7 @@ const ThemeConfig = {
 
 ```bash
 # 🍴 1. Fork el proyecto
-git fork https://github.com/fabystudios/Rodados.git
+git fork https://github.com/WillyEsco/Rodados.git
 
 # 🌿 2. Crea tu rama mágica  
 git checkout -b feature/mi-idea-genial
@@ -905,7 +905,7 @@ git push origin feature/mi-idea-genial
 <br>
 
 [![📧 Email](https://img.shields.io/badge/📧_Email-willyEscobar@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:willyEscobar@gmail.com)
-[![🐙 GitHub](https://img.shields.io/badge/🐙_GitHub-fabystudios-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fabystudios)
+[![🐙 GitHub](https://img.shields.io/badge/🐙_GitHub-WillyEsco/rodados-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/WillyEsco/rodados)
 [![💼 LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/tu-perfil)
 
 <br>
@@ -961,8 +961,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-💡 SIN GARANTÍA - ÚSALO BAJO TU PROPIO RIESGO
-```
+💡 SIN GARANTÍA - USÁLO BAJO TU PROPIO RIESGO
+````
 
 ---
 
