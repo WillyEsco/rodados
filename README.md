@@ -676,26 +676,43 @@ const ProductSchema = {
 🚗 RODADOS-ESHOP/
 ├── 📦 src/
 │   ├── 🧩 components/          # Átomos & Moléculas
-│   │   ├── 🎨 Layout.jsx       # Estructura maestra
-│   │   ├── 🍔 Header.jsx       # Navegación principal
-│   │   ├── 👇 Footer.jsx       # Pie elegante
-│   │   ├── 📋 ProductList.jsx  # Lista glassmorphic
-│   │   ├── 🎴 ProductCard.jsx  # Cards premium  
-│   │   ├── 🛒 Cart.jsx         # Carrito inteligente
-│   │   ├── 📱 BottomNav.jsx    # Navegación atómica
-│   │   └── 🌙 ThemeToggle.jsx  # Switch mágico
+│   │   ├── 🍔 Header.jsx
+│   │   ├── 👇 Footer.jsx
+│   │   ├── 📋 ProductList.jsx
+│   │   ├── 🎴 ProductCard.jsx
+│   │   ├── 🛒 Cart.jsx
+│   │   ├── 🛒 CartWithAuth.jsx
+│   │   ├── 📱 BottomNavigation.jsx
+│   │   ├── 🔐 LoginModal.jsx
+│   │   ├── 🌙 ThemeToggle.jsx
+│   │   ├── 🎨 Layout.jsx
+│   │   ├── 🔄 LoadingSpinner.jsx
+│   │   ├── 🎯 SearchBar.jsx
+│   │   ├── 📊 FilterPanel.jsx
+│   │   ├── 🔔 NotificationBanner.jsx
+│   │   ├── 📷 ImageGallery.jsx
+│   │   ├── 💳 PaymentForm.jsx
+│   │   ├── 👤 UserProfile.jsx
+│   │   └── 🧪 DebugAuth.jsx
 │   │
 │   ├── 📄 pages/                 # Páginas Organism
 │   │   ├── 🏠 home.jsx           # Landing épico
 │   │   ├── 🛍️ products.jsx       # Catálogo glassmorphic
 │   │   ├── 👥 about.jsx          # Historia visual
 │   │   └── 🔍 productDetails.jsx # Detalles inmersivos
+│   │   └── 👨‍💼 AdminDashboard.jsx # Panel administrativo
+│   │   └── 🚫 NotFound.jsx        # Página 404 personalizada
+│   │   └── 🔐 Login.jsx         # Sistema de autenticación
+│   │   └── 💳 Checkout.jsx         # Sistema de pago y checkout
 │   │
 │   ├── 🎭 contexts/             # Estado Global
+│   │   ├── 🔐 AuthContext.jsx    # Sistema autenticación
+│   │   └── 🛒 CarritoContext.jsx  # Estado del carrito
 │   │   └── 🌈 ThemeContext.jsx  # Magia de temas
 │   │
 │   ├── 🎣 hooks/               # Custom Hooks
 │   │   └── 🌙 useThemeMode.js  # Hook temático
+│   │   └── ⬆️ useScrollToTop.js # Scroll automático
 │   │
 │   ├── 🎨 styles/             # Estilos Enhanced
 │   ├── 🖼️ assets/             # Recursos Premium
